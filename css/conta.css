@@ -1,0 +1,71 @@
+/* conta.css */
+.account-layout {
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  gap: 28px;
+  align-items: start;
+}
+.account-sidebar {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 24px;
+  position: sticky;
+  top: 90px;
+}
+.account-user {
+  text-align: center;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--line);
+  margin-bottom: 20px;
+}
+.account-avatar {
+  width: 70px; height: 70px; border-radius: 50%;
+  background: linear-gradient(135deg, var(--primary), var(--accent));
+  color: #fff; font-size: 1.8rem; font-weight: 700;
+  display: grid; place-items: center; margin: 0 auto 12px;
+}
+.account-user h3 { font-size: 1.1rem; margin-bottom: 4px; }
+.account-user p { font-size: .85rem; color: var(--muted); }
+
+.account-nav { display: flex; flex-direction: column; gap: 4px; }
+.account-nav a {
+  display: flex; align-items: center; gap: 10px;
+  padding: 12px 14px; border-radius: 10px;
+  font-weight: 500; color: var(--muted); transition: var(--transition);
+}
+.account-nav a:hover { background: #eef3fb; color: var(--ink); }
+.account-nav a.active { background: #e7effd; color: var(--primary); font-weight: 600; }
+.account-nav a.logout { color: var(--danger); margin-top: 10px; border-top: 1px solid var(--line); border-radius: 0 0 10px 10px; padding-top: 16px; }
+.account-nav a.logout:hover { background: #fdeaea; }
+
+.account-content { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 28px; }
+.account-content h2 { margin-bottom: 20px; display: flex; align-items: center; gap: 10px; }
+
+/* Pedidos */
+.order-card {
+  border: 1px solid var(--line); border-radius: var(--radius-sm);
+  padding: 16px; margin-bottom: 16px;
+}
+.order-header {
+  display: flex; justify-content: space-between; align-items: center;
+  border-bottom: 1px solid var(--line); padding-bottom: 12px; margin-bottom: 12px;
+  flex-wrap: wrap; gap: 10px;
+}
+.order-id { font-weight: 700; color: var(--primary); }
+.order-date { font-size: .85rem; color: var(--muted); }
+.order-status {
+  font-size: .75rem; font-weight: 700; text-transform: uppercase;
+  padding: 4px 10px; border-radius: 999px;
+}
+.status-pendente { background: #fff3cd; color: #856404; }
+.status-concluido { background: #d4edda; color: #155724; }
+.order-body { font-size: .9rem; }
+.order-body strong { color: var(--ink); }
+
+/* Responsivo para telemóvel */
+@media (max-width: 800px) {
+  .account-layout { grid-template-columns: 1fr; }
+  .account-sidebar { position: static; margin-bottom: 20px; }
+  .account-content { padding: 20px; }
+}
