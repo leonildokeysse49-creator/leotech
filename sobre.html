@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sobre — Leotech</title>
+  <link rel="stylesheet" href="assets/css/base.css">
+  <link rel="stylesheet" href="assets/css/layout.css">
+  <link rel="stylesheet" href="assets/css/components.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="index.html" class="brand"><span class="brand-mark">L</span><span class="brand-name">Leotech</span></a>
+      <nav class="main-nav" id="mainNav">
+        <a href="index.html" data-i18n="nav.home">Início</a>
+        <a href="servicos.html" data-i18n="nav.services">Serviços</a>
+        <a href="loja.html" data-i18n="nav.shop">Loja</a>
+        <a href="sobre.html" class="active" data-i18n="nav.about">Sobre</a>
+        <a href="contacto.html" data-i18n="nav.contact">Contacto</a>
+      </nav>
+      <div class="header-actions">
+        <div class="lang" id="langSwitch">
+          <button class="lang-btn" type="button" aria-haspopup="true" aria-expanded="false">
+            <i class="fa-solid fa-globe"></i><span id="langLabel">Português</span><i class="fa-solid fa-chevron-down" style="font-size:.7em"></i>
+          </button>
+          <ul class="lang-menu">
+            <li><button type="button" data-lang-btn="pt">Português</button></li>
+            <li><button type="button" data-lang-btn="en">English</button></li>
+          </ul>
+        </div>
+        <a href="carrinho.html" class="icon-btn" aria-label="Carrinho" data-i18n-aria="nav.cart">
+          <i class="fa-solid fa-cart-shopping"></i><span class="cart-count" id="cartCount">0</span>
+        </a>
+        <div id="authWrap"></div>
+        <button class="menu-toggle" id="menuToggle" type="button" aria-label="Menu" aria-controls="mainNav" aria-expanded="false"><i class="fa-solid fa-bars"></i></button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="page-head">
+      <div class="container">
+        <span class="badge"><i class="fa-solid fa-circle-info"></i> <span data-i18n="about.badge">Sobre nós</span></span>
+        <h1 data-i18n="about.title">Quem sou e o que faço</h1>
+        <p data-i18n="about.subtitle">Técnico formado pelo IMEP em Electricidade, Informática e Programação de Aplicações Web. Apaixonado por criar soluções que facilitam a gestão empresarial em Moçambique.</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container about-grid">
+        <div class="about-text">
+          <h2 data-i18n="about.story.title">A minha história</h2>
+          <p data-i18n="about.story.p1">Sou Leonildo Keysse, técnico formado pelo Instituto Médio Politécnico (IMEP) nas áreas de Electricidade, Informática e Programação de Aplicações Web. Na área de Electricidade, adquiri noções básicas sobre circuitos, esquemas eléctricos e segurança em instalações. Em Informática, aprendi fundamentos de hardware, software, redes e suporte técnico.</p>
+          <p data-i18n="about.story.p2">Actualmente, estou a concluir o módulo de Desenvolvimento de Páginas Web em HTML, onde aprendi HTML5, CSS3, JavaScript, formulários, acessibilidade e publicação de sites. Desenvolvi quatro sistemas completos com Java Swing e MySQL: FoodManager, FacturacaoPro, Sistema Salão de Beleza e Gestão Desportiva.</p>
+          <p data-i18n="about.story.p3">Sou apaixonado por tecnologia e estou sempre à procura de aprender mais para criar soluções que facilitem a gestão empresarial em Moçambique.</p>
+
+          <h2 data-i18n="about.education.title">Formação académica</h2>
+          <ul class="check-list">
+            <li><i class="fa-solid fa-bolt" style="margin-right:8px;color:var(--primary)"></i><span data-i18n="about.edu.electricidade">Técnico de Electricidade — 1 ano</span></li>
+            <li><i class="fa-solid fa-laptop" style="margin-right:8px;color:var(--primary)"></i><span data-i18n="about.edu.informatica">Técnico de Informática — 1 ano</span></li>
+            <li><i class="fa-solid fa-globe" style="margin-right:8px;color:var(--primary)"></i><span data-i18n="about.edu.web">Programação de Aplicações Web — 1 ano</span></li>
+            <li><i class="fa-solid fa-graduation-cap" style="margin-right:8px;color:var(--primary)"></i><span data-i18n="about.edu.courses">Cursos adicionais: Java, PHP, MySQL, HTML, CSS, JS</span></li>
+          </ul>
+
+          <h2 data-i18n="about.skills.title">Competências técnicas</h2>
+          <div class="skill-tags">
+            <span class="chip"><i class="fa-brands fa-java"></i> Java Swing</span>
+            <span class="chip"><i class="fa-brands fa-php"></i> PHP</span>
+            <span class="chip"><i class="fa-solid fa-database"></i> MySQL</span>
+            <span class="chip"><i class="fa-brands fa-html5"></i> HTML5</span>
+            <span class="chip"><i class="fa-brands fa-css3-alt"></i> CSS3</span>
+            <span class="chip"><i class="fa-brands fa-js"></i> JavaScript</span>
+            <span class="chip"><i class="fa-brands fa-git-alt"></i> Git</span>
+            <span class="chip"><i class="fa-brands fa-github"></i> GitHub</span>
+          </div>
+        </div>
+
+        <aside class="about-card">
+          <div class="card">
+            <h3><i class="fa-solid fa-chart-line" style="color:var(--primary);margin-right:8px"></i><span data-i18n="about.stats.title">Em números</span></h3>
+            <ul class="stats-list">
+              <li><strong>3</strong> <span data-i18n="about.stats.courses">Cursos concluídos</span></li>
+              <li><strong>4</strong> <span data-i18n="about.stats.systems">Sistemas criados</span></li>
+              <li><strong>8+</strong> <span data-i18n="about.stats.tech">Tecnologias dominadas</span></li>
+              <li><strong>100%</strong> <span data-i18n="about.stats.functional">Funcionalidade</span></li>
+            </ul>
+          </div>
+          <div class="card" style="margin-top:16px">
+            <h3><i class="fa-solid fa-laptop-code" style="color:var(--primary);margin-right:8px"></i><span data-i18n="about.systems.title">Sistemas desenvolvidos</span></h3>
+            <ul class="check-list">
+              <li><i class="fa-solid fa-utensils" style="margin-right:8px;color:var(--primary)"></i><span data-i18n="about.sys.foodmanager">FoodManager — Restaurantes</span></li>
+              <li><i class="fa-solid fa-file-invoice-dollar" style="margin-right:8px;color:var(--primary)"></i><span data-i18n="about.sys.facturacao">FacturacaoPro — Faturação</span></li>
+              <li><i class="fa-solid fa-scissors" style="margin-right:8px;color:var(--primary)"></i><span data-i18n="about.sys.salao">Sistema Salão de Beleza</span></li>
+              <li><i class="fa-solid fa-futbol" style="margin-right:8px;color:var(--primary)"></i><span data-i18n="about.sys.desportiva">Gestão Desportiva</span></li>
+            </ul>
+            <a href="loja.html" class="link-arrow"><span data-i18n="about.sys.link">Ver sistemas na loja</span> <i class="fa-solid fa-arrow-right"></i></a>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="section section-alt">
+      <div class="container">
+        <div class="section-head">
+          <h2 data-i18n="about.testimonials.title">O que dizem os clientes</h2>
+          <p data-i18n="about.testimonials.subtitle">Depoimentos reais de quem já usa os sistemas.</p>
+        </div>
+        <div class="grid-3">
+          <article class="card">
+            <p class="quote" data-i18n="about.testimonials.q1">"O FoodManager revolucionou a gestão do nosso restaurante. O controle de mesas e pedidos ficou muito mais eficiente e rápido. Recomendo a todos!"</p>
+            <strong class="quote-author">— Ganito Mussa, Maputo</strong>
+          </article>
+          <article class="card">
+            <p class="quote" data-i18n="about.testimonials.q2">"O sistema FacturacaoPro simplificou toda a nossa emissão de faturas. Rápido, seguro e com relatórios detalhados que facilitam a gestão."</p>
+            <strong class="quote-author">— Rene, Maputo</strong>
+          </article>
+          <article class="card">
+            <p class="quote" data-i18n="about.testimonials.q3">"A gestão de clientes e agendamentos ficou muito mais organizada. O programa de fidelidade é um diferencial incrível para o nosso negócio."</p>
+            <strong class="quote-author">— Narciso, Maputo</strong>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-inner">
+        <div class="footer-brand"><a href="index.html" class="brand brand-light"><span class="brand-mark">L</span><span class="brand-name">Leotech</span></a><p data-i18n="footer.tagline">Informática, programação e produtos informáticos.</p></div>
+        <div><h4 data-i18n="footer.company">Empresa</h4><ul><li><a href="sobre.html" data-i18n="footer.about">Sobre nós</a></li><li><a href="contacto.html" data-i18n="nav.contact">Contacto</a></li></ul></div>
+        <div><h4 data-i18n="footer.services">Serviços</h4><ul><li><a href="servicos.html" data-i18n="footer.allServices">Todos os serviços</a></li><li><a href="conta/suporte.html" data-i18n="footer.support">Suporte</a></li></ul></div>
+        <div><h4 data-i18n="footer.shop">Loja</h4><ul><li><a href="loja.html" data-i18n="footer.categories">Categorias</a></li><li><a href="carrinho.html" data-i18n="nav.cart">Carrinho</a></li></ul></div>
+      </div>
+      <div class="footer-bottom">
+        <span>© <span id="year"></span> Leotech. <span data-i18n="footer.rights">Todos os direitos reservados.</span></span>
+        <span data-i18n="footer.made">Feito em Moçambique</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="assets/js/config.js"></script>
+  <script src="assets/js/i18n.js"></script>
+  <script src="assets/js/auth.js"></script>
+  <script src="assets/js/nav.js"></script>
+</body>
+</html>

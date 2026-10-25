@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Entregas — Estafeta Leotech</title>
+  <link rel="stylesheet" href="../assets/css/base.css">
+  <link rel="stylesheet" href="../assets/css/layout.css">
+  <link rel="stylesheet" href="../assets/css/components.css">
+  <link rel="stylesheet" href="../assets/css/admin.css">
+</head>
+<body>
+  <div class="admin-layout">
+    <aside class="admin-sidebar">
+      <a href="index.html" class="admin-brand"><span class="brand-mark">L</span> Estafeta</a>
+      <nav class="admin-nav">
+        <a href="index.html" class="active"><i class="fa-solid fa-truck-fast"></i> As Minhas Entregas</a>
+        <a href="../index.html" style="margin-top:20px"><i class="fa-solid fa-arrow-left"></i> Voltar ao Site</a>
+      </nav>
+    </aside>
+
+    <main class="admin-main">
+      <div class="admin-header">
+        <h1>Painel de Entregas</h1>
+        <div class="admin-user"><i class="fa-solid fa-circle-user"></i> <span id="adminName">Estafeta</span> <button id="adminLogout" class="btn btn-outline">Sair</button></div>
+      </div>
+
+      <div class="table-container">
+        <table class="data-table">
+          <thead><tr><th>Pedido</th><th>Cliente</th><th>Contacto</th><th>Endereço</th><th>Ação</th></tr></thead>
+          <tbody id="estafetaRoot"></tbody>
+        </table>
+      </div>
+    </main>
+  </div>
+
+  <script src="../assets/js/config.js"></script>
+  <script src="../assets/js/i18n.js"></script>
+  <script src="../assets/js/auth.js"></script>
+  <script src="../assets/js/estafeta.js"></script>
+</body>
+</html>

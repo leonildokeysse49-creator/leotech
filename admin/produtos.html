@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Produtos — Admin Leotech</title>
+  <link rel="stylesheet" href="../assets/css/base.css">
+  <link rel="stylesheet" href="../assets/css/layout.css">
+  <link rel="stylesheet" href="../assets/css/components.css">
+  <link rel="stylesheet" href="../assets/css/admin.css">
+  <style>
+    .img-preview { width: 50px; height: 50px; object-fit: cover; border-radius: 6px; }
+    .badge-stock { padding: 4px 8px; border-radius: 6px; font-size: 0.8rem; font-weight: 600; }
+    .stock-ok { background: #e5f7ef; color: #0e7a4b; }
+    .stock-low { background: #fdeaea; color: #b42318; }
+  </style>
+</head>
+<body>
+  <div class="admin-layout">
+    <aside class="admin-sidebar">
+      <a href="index.html" class="admin-brand"><span class="brand-mark">L</span> Admin</a>
+      <nav class="admin-nav">
+        <a href="index.html"><i class="fa-solid fa-chart-pie"></i> Dashboard</a>
+        <a href="pedidos.html"><i class="fa-solid fa-box"></i> Pedidos</a>
+        <a href="produtos.html" class="active"><i class="fa-solid fa-tags"></i> Produtos</a>
+        <a href="stock.html"><i class="fa-solid fa-boxes-stacked"></i> Gestão de Stock</a>
+        <a href="categorias.html"><i class="fa-solid fa-list"></i> Categorias</a>
+        <a href="mensagens.html"><i class="fa-solid fa-envelope"></i> Mensagens</a>
+        <a href="servicos.html"><i class="fa-solid fa-screwdriver-wrench"></i> Serviços</a>
+        <a href="suporte.html"><i class="fa-solid fa-headset"></i> Suporte</a>
+        <a href="utilizadores.html"><i class="fa-solid fa-users"></i> Utilizadores</a>
+        <a href="relatorios.html"><i class="fa-solid fa-chart-line"></i> Relatórios</a>
+        <a href="../index.html" style="margin-top:20px"><i class="fa-solid fa-arrow-left"></i> Voltar ao Site</a>
+      </nav>
+    </aside>
+
+    <main class="admin-main">
+      <div class="admin-header">
+        <h1>Gestão de Produtos</h1>
+        <div class="admin-user"><i class="fa-solid fa-circle-user"></i> <span id="adminName">Admin</span> <button id="adminLogout" class="btn btn-outline">Sair</button></div>
+      </div>
+
+      <div class="card" style="margin-bottom:24px;" id="formContainer">
+        <h3 style="margin-bottom:16px;" id="formTitle">Adicionar Novo Produto</h3>
+        <form id="productForm" class="grid-2" style="gap:16px;">
+          <input type="hidden" name="editId" id="editId">
+          
+          <label class="field"><span>Nome do Produto</span><input class="input" name="name" id="prodName" required></label>
+          <label class="field"><span>Preço (MZN)</span><input class="input" type="number" name="price" id="prodPrice" required></label>
+          
+          <label class="field"><span>Categoria</span>
+            <select class="select" name="category" id="prodCategory" required>
+              <option value="">A carregar categorias...</option>
+            </select>
+          </label>
+
+          <label class="field"><span>Quantidade em Stock</span><input class="input" type="number" name="stock" id="prodStock" required min="0" value="10"></label>
+
+          <label class="field"><span>Imagem via Link (URL)</span><input class="input" type="url" name="imgUrl" id="prodImgUrl" placeholder="https://..."></label>
+          
+          <label class="field" style="grid-column: 1 / -1;">
+            <span>OU Imagem do Computador (Upload Direto)</span>
+            <input class="input" type="file" accept="image/*" id="prodImgFile" style="padding:8px;">
+          </label>
+
+          <label class="field" style="grid-column: 1 / -1;"><span>Descrição</span><input class="input" name="desc" id="prodDesc" required></label>
+          
+          <div style="grid-column: 1 / -1;">
+            <button type="submit" class="btn btn-primary" id="submitBtn"><i class="fa-solid fa-plus"></i> Adicionar Produto</button>
+            <button type="button" class="btn btn-outline" id="cancelEditBtn" hidden onclick="cancelEdit()">Cancelar Edição</button>
+          </div>
+        </form>
+      </div>
+
+      <div class="table-container">
+        <table class="data-table">
+          <thead><tr><th>Foto</th><th>Nome</th><th>Categoria</th><th>Preço</th><th>Stock</th><th>Ações</th></tr></thead>
+          <tbody id="adminProdutosRoot"><tr><td colspan="6" style="text-align:center">A carregar...</td></tr></tbody>
+        </table>
+      </div>
+    </main>
+  </div>
+
+  <script src="../assets/js/config.js"></script>
+  <script src="../assets/js/i18n.js"></script>
+  <script src="../assets/js/auth.js"></script>
+  <script src="../assets/js/admin.js"></script>
+  <script>
+    var currentFile = null;
+
+    async function waitForSupabase() {
+      return new Promise(function(resolve) {
+        if (window.supabaseClient) { resolve(); return; }
+        var interval = setInterval(function() { if (window.supabaseClient) { clearInterval(interval); resolve(); } }, 100);
+      });
+    }
+
+    document.addEventListener("DOMContentLoaded", async function () {
+      var root = document.getElementById("adminProdutosRoot");
+      var form = document.getElementById("productForm");
+      var categorySelect = document.getElementById("prodCategory");
+
+      await waitForSupabase();
+
+      // Carregar categorias para o select
+      var resCats = await window.supabaseClient.from('categories').select('*').order('name');
+      var cats = resCats.data || [];
+      categorySelect.innerHTML = '<option value="">Selecione...</option>';
+      cats.forEach(function(c) {
+        categorySelect.innerHTML += '<option value="' + c.name.toLowerCase() + '">' + c.name + '</option>';
+      });
+
+      document.getElementById("prodImgFile").addEventListener("change", function(e) {
+        currentFile = e.target.files[0];
+      });
+      
+      async function renderProducts() {
+        root.innerHTML = '<tr><td colspan="6" style="text-align:center">A carregar...</td></tr>';
+        var res = await window.supabaseClient.from('products').select('*').order('name');
+        var products = res.data || [];
+        
+        root.innerHTML = products.map(function(p) {
+          var imgHtml = p.image_url ? '<img src="' + p.image_url + '" class="img-preview">' : '<i class="fa-solid fa-image" style="font-size:1.5rem;color:#ccc"></i>';
+          var stockClass = p.stock_quantity > 5 ? 'stock-ok' : 'stock-low';
+          
+          return '<tr>' +
+            '<td>' + imgHtml + '</td>' +
+            '<td><strong>' + p.name + '</strong></td>' +
+            '<td>' + p.category + '</td>' +
+            '<td>' + Number(p.price).toLocaleString("pt-MZ") + ' MZN</td>' +
+            '<td><span class="badge-stock ' + stockClass + '">' + (p.stock_quantity || 0) + ' un.</span></td>' +
+            '<td>' +
+              '<button class="btn btn-outline btn-sm edit-btn" data-id="' + p.id + '"><i class="fa-solid fa-pen"></i></button> ' +
+              '<button class="btn btn-outline btn-sm delete-btn" data-id="' + p.id + '" style="color:var(--danger);border-color:#f8d7da;"><i class="fa-solid fa-trash"></i></button>' +
+            '</td>' +
+          '</tr>';
+        }).join("");
+      }
+      renderProducts();
+
+      form.addEventListener("submit", async function(e) {
+        e.preventDefault();
+        var btn = document.getElementById("submitBtn");
+        var originalTxt = btn.innerHTML;
+        btn.disabled = true;
+        btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> A processar...';
+
+        var editId = document.getElementById("editId").value;
+        var imgFinal = document.getElementById("prodImgUrl").value.trim();
+
+        if (currentFile) {
+          var fileName = Date.now() + "_" + currentFile.name;
+          var resUpload = await window.supabaseClient.storage.from('products').upload(fileName, currentFile);
+          
+          if (!resUpload.error) {
+            var resUrl = window.supabaseClient.storage.from('products').getPublicUrl(fileName);
+            imgFinal = resUrl.data.publicUrl;
+          }
+        }
+
+        var data = {
+          name: form.name.value,
+          price: parseFloat(form.price.value),
+          category: form.category.value.trim(),
+          stock_quantity: parseInt(form.stock.value),
+          image_url: imgFinal,
+          description: form.desc.value,
+          icon: "fa-box"
+        };
+
+        if (editId) {
+          await window.supabaseClient.from('products').update(data).eq('id', editId);
+        } else {
+          data.id = "p" + Date.now();
+          await window.supabaseClient.from('products').insert([data]);
+        }
+
+        form.reset();
+        document.getElementById("editId").value = "";
+        document.getElementById("formTitle").textContent = "Adicionar Novo Produto";
+        btn.innerHTML = '<i class="fa-solid fa-plus"></i> Adicionar Produto';
+        document.getElementById("cancelEditBtn").hidden = true;
+        currentFile = null;
+        renderProducts();
+        btn.disabled = false;
+      });
+
+      root.addEventListener("click", async function(e) {
+        var btnDel = e.target.closest(".delete-btn");
+        var btnEdit = e.target.closest(".edit-btn");
+        
+        if (btnDel) {
+          if (!confirm("Apagar este produto?")) return;
+          await window.supabaseClient.from('products').delete().eq('id', btnDel.getAttribute("data-id"));
+          renderProducts();
+        }
+
+        if (btnEdit) {
+          var id = btnEdit.getAttribute("data-id");
+          var res = await window.supabaseClient.from('products').select('*').eq('id', id).single();
+          var p = res.data;
+          if (!p) return;
+
+          document.getElementById("editId").value = p.id;
+          form.name.value = p.name;
+          form.price.value = p.price;
+          form.category.value = p.category;
+          form.stock.value = p.stock_quantity || 0;
+          form.imgUrl.value = p.image_url || "";
+          form.desc.value = p.description || "";
+          
+          document.getElementById("formTitle").textContent = "Editar Produto";
+          document.getElementById("submitBtn").innerHTML = '<i class="fa-solid fa-save"></i> Guardar Alterações';
+          document.getElementById("cancelEditBtn").hidden = false;
+          window.scrollTo(0, 0);
+        }
+      });
+    });
+
+    function cancelEdit() {
+      document.getElementById("productForm").reset();
+      document.getElementById("editId").value = "";
+      document.getElementById("formTitle").textContent = "Adicionar Novo Produto";
+      document.getElementById("submitBtn").innerHTML = '<i class="fa-solid fa-plus"></i> Adicionar Produto';
+      document.getElementById("cancelEditBtn").hidden = true;
+      currentFile = null;
+    }
+  </script>
+</body>
+</html>

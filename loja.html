@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Loja — Leotech</title>
+  <link rel="stylesheet" href="assets/css/base.css">
+  <link rel="stylesheet" href="assets/css/layout.css">
+  <link rel="stylesheet" href="assets/css/components.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="index.html" class="brand"><span class="brand-mark">L</span><span class="brand-name">Leotech</span></a>
+      <nav class="main-nav" id="mainNav">
+        <a href="index.html" data-i18n="nav.home">Início</a>
+        <a href="servicos.html" data-i18n="nav.services">Serviços</a>
+        <a href="loja.html" data-i18n="nav.shop">Loja</a>
+        <a href="sobre.html" data-i18n="nav.about">Sobre</a>
+        <a href="contacto.html" data-i18n="nav.contact">Contacto</a>
+      </nav>
+      <div class="header-actions">
+        <div class="lang" id="langSwitch">
+          <button class="lang-btn" type="button" aria-haspopup="true" aria-expanded="false">
+            <i class="fa-solid fa-globe"></i><span id="langLabel">Português</span><i class="fa-solid fa-chevron-down" style="font-size:.7em"></i>
+          </button>
+          <ul class="lang-menu">
+            <li><button type="button" data-lang-btn="pt">Português</button></li>
+            <li><button type="button" data-lang-btn="en">English</button></li>
+          </ul>
+        </div>
+        <a href="carrinho.html" class="icon-btn" aria-label="Carrinho" data-i18n-aria="nav.cart">
+          <i class="fa-solid fa-cart-shopping"></i><span class="cart-count" id="cartCount">0</span>
+        </a>
+        <div id="authWrap"></div>
+        <button class="menu-toggle" id="menuToggle" type="button" aria-label="Menu" aria-controls="mainNav" aria-expanded="false"><i class="fa-solid fa-bars"></i></button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="page-head">
+      <div class="container">
+        <span class="badge"><i class="fa-solid fa-store"></i> <span data-i18n="shop.badge">Loja</span></span>
+        <h1 data-i18n="shop.title">Produtos e sistemas</h1>
+        <p data-i18n="shop.subtitle">Sistemas desenvolvidos pela Leotech e produtos informáticos organizados por categoria.</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="shop-toolbar">
+          <div class="shop-cats">
+            <button type="button" class="chip active" data-cat="all" data-i18n="shop.all">Todos</button>
+            <button type="button" class="chip" data-cat="sistemas"><i class="fa-solid fa-laptop-code"></i> <span data-i18n="cat.sistemas">Sistemas</span></button>
+            <button type="button" class="chip" data-cat="computadores"><i class="fa-solid fa-laptop"></i> <span data-i18n="cat.computadores">Computadores</span></button>
+            <button type="button" class="chip" data-cat="acessorios"><i class="fa-solid fa-computer-mouse"></i> <span data-i18n="cat.acessorios">Acessórios</span></button>
+            <button type="button" class="chip" data-cat="redes"><i class="fa-solid fa-wifi"></i> <span data-i18n="cat.redes">Redes</span></button>
+            <button type="button" class="chip" data-cat="impressoras"><i class="fa-solid fa-print"></i> <span data-i18n="cat.impressoras">Impressoras</span></button>
+            <button type="button" class="chip" data-cat="componentes"><i class="fa-solid fa-microchip"></i> <span data-i18n="cat.componentes">Componentes</span></button>
+          </div>
+          <div class="shop-controls">
+            <input type="search" id="shopSearch" class="input" placeholder="Pesquisar..." data-i18n-placeholder="shop.searchPh">
+            <select id="shopSort" class="select">
+              <option value="name" data-i18n="shop.sort.name">Nome (A-Z)</option>
+              <option value="priceAsc" data-i18n="shop.sort.priceAsc">Preço (mais baixo)</option>
+              <option value="priceDesc" data-i18n="shop.sort.priceDesc">Preço (mais alto)</option>
+            </select>
+          </div>
+        </div>
+        <div class="product-grid" id="productGrid"></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-inner">
+        <div class="footer-brand">
+          <a href="index.html" class="brand brand-light"><span class="brand-mark">L</span><span class="brand-name">Leotech</span></a>
+          <p data-i18n="footer.tagline">Informática, programação e produtos informáticos.</p>
+        </div>
+        <div><h4 data-i18n="footer.company">Empresa</h4><ul><li><a href="sobre.html" data-i18n="footer.about">Sobre nós</a></li><li><a href="contacto.html" data-i18n="nav.contact">Contacto</a></li></ul></div>
+        <div><h4 data-i18n="footer.services">Serviços</h4><ul><li><a href="servicos.html" data-i18n="footer.allServices">Todos os serviços</a></li><li><a href="conta/suporte.html" data-i18n="footer.support">Suporte</a></li></ul></div>
+        <div><h4 data-i18n="footer.shop">Loja</h4><ul><li><a href="loja.html" data-i18n="footer.categories">Categorias</a></li><li><a href="carrinho.html" data-i18n="nav.cart">Carrinho</a></li></ul></div>
+      </div>
+      <div class="footer-bottom">
+        <span>© <span id="year"></span> Leotech. <span data-i18n="footer.rights">Todos os direitos reservados.</span></span>
+        <span data-i18n="footer.made">Feito em Moçambique</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="assets/js/config.js"></script>
+  <script src="assets/js/i18n.js"></script>
+  <script src="assets/js/auth.js"></script>
+  <script src="assets/js/nav.js"></script>
+  <script src="assets/js/loja.js"></script>
+</body>
+</html>

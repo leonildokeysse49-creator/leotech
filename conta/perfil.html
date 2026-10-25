@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>O Meu Perfil — Leotech</title>
+  <link rel="stylesheet" href="../assets/css/base.css">
+  <link rel="stylesheet" href="../assets/css/layout.css">
+  <link rel="stylesheet" href="../assets/css/components.css">
+  <link rel="stylesheet" href="../assets/css/conta.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="../index.html" class="brand"><span class="brand-mark">L</span><span class="brand-name">Leotech</span></a>
+      <nav class="main-nav" id="mainNav">
+        <a href="../index.html" data-i18n="nav.home">Início</a><a href="../servicos.html" data-i18n="nav.services">Serviços</a><a href="../loja.html" data-i18n="nav.shop">Loja</a><a href="../sobre.html" data-i18n="nav.about">Sobre</a><a href="../contacto.html" data-i18n="nav.contact">Contacto</a>
+      </nav>
+      <div class="header-actions">
+        <a href="../carrinho.html" class="icon-btn"><i class="fa-solid fa-cart-shopping"></i><span class="cart-count" id="cartCount">0</span></a>
+        <div id="authWrap"></div>
+        <button class="menu-toggle" id="menuToggle"><i class="fa-solid fa-bars"></i></button>
+      </div>
+    </div>
+  </header>
+
+  <main class="section">
+    <div class="container account-layout">
+      
+      <aside class="account-sidebar">
+        <div class="account-user">
+          <div class="account-avatar"></div>
+          <h3 class="js-user-name">...</h3>
+          <p class="js-user-email">...</p>
+        </div>
+        <nav class="account-nav">
+          <a href="perfil.html" class="active"><i class="fa-solid fa-user"></i> <span data-i18n="conta.profile">O Meu Perfil</span></a>
+          <a href="pedidos.html"><i class="fa-solid fa-box"></i> <span data-i18n="conta.myOrders">Os Meus Pedidos</span></a>
+          <a href="servicos.html"><i class="fa-solid fa-screwdriver-wrench"></i> <span data-i18n="conta.myServices">Os Meus Serviços</span></a>
+          <a href="suporte.html"><i class="fa-solid fa-headset"></i> <span data-i18n="conta.support">Suporte</span></a>
+          <a href="#" class="js-logout logout"><i class="fa-solid fa-right-from-bracket"></i> <span data-i18n="conta.logout">Sair</span></a>
+        </nav>
+      </aside>
+
+      <div class="account-content">
+        <h2><i class="fa-solid fa-user" style="color:var(--primary)"></i> <span data-i18n="conta.profile">O Meu Perfil</span></h2>
+        <form id="perfilForm">
+          <label class="field">
+            <span data-i18n="conta.fullName">Nome completo</span>
+            <input class="input" type="text" name="name" required>
+          </label>
+          <label class="field">
+            <span data-i18n="conta.email">Email (não editável)</span>
+            <input class="input" type="email" name="email" readonly style="background:#f4f6f9;color:#888">
+          </label>
+          <label class="field">
+            <span data-i18n="conta.phone">Telefone / WhatsApp</span>
+            <input class="input" type="tel" name="phone" placeholder="+258 ...">
+          </label>
+          <button type="submit" class="btn btn-primary"><i class="fa-solid fa-floppy-disk"></i> <span data-i18n="conta.save">Guardar alterações</span></button>
+          <p class="form-status" id="perfilStatus" hidden></p>
+        </form>
+      </div>
+
+    </div>
+  </main>
+
+  <script src="../assets/js/config.js"></script>
+  <script src="../assets/js/i18n.js"></script>
+  <script src="../assets/js/auth.js"></script>
+  <script src="../assets/js/nav.js"></script>
+  <script src="../assets/js/conta.js"></script>
+</body>
+</html>

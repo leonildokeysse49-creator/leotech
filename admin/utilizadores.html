@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Utilizadores — Admin Leotech</title>
+  <link rel="stylesheet" href="../assets/css/base.css">
+  <link rel="stylesheet" href="../assets/css/layout.css">
+  <link rel="stylesheet" href="../assets/css/components.css">
+  <link rel="stylesheet" href="../assets/css/admin.css">
+  <style>
+    .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(15, 23, 40, 0.7); backdrop-filter: blur(4px); display: none; justify-content: center; align-items: center; z-index: 1000; }
+    .modal-overlay.active { display: flex; }
+    .modal-box { background: #fff; border-radius: var(--radius); width: 90%; max-width: 480px; padding: 28px; box-shadow: 0 20px 40px rgba(0,0,0,0.2); text-align: center; }
+    .credentials-box { background: #f8fafc; border: 1px dashed #cbd5e1; border-radius: 8px; padding: 16px; margin: 16px 0; text-align: left; }
+    .credentials-box p { margin: 8px 0; color: var(--ink); font-size: 0.95rem; display: flex; align-items: center; gap: 8px; }
+    .credentials-box strong { color: var(--primary); min-width: 110px; }
+    .credentials-box i { width: 20px; text-align: center; font-size: 1.1rem; }
+    .send-options { display: flex; gap: 12px; margin-bottom: 20px; }
+    .send-btn { flex: 1; padding: 16px; border-radius: 12px; border: 2px solid var(--line); background: #fff; cursor: pointer; transition: 0.2s; display: flex; flex-direction: column; align-items: center; gap: 8px; }
+    .send-btn i { font-size: 1.8rem; }
+    .send-btn span { font-weight: 600; font-size: 0.9rem; color: var(--ink); }
+    .send-btn:hover { border-color: var(--primary); background: #f4f8ff; }
+    .wa-form { display: none; text-align: center; margin-top: 10px; }
+    .wa-form.active { display: block; }
+    .email-form { display: none; text-align: center; margin-top: 10px; }
+    .email-form.active { display: block; }
+  </style>
+</head>
+<body>
+  <div class="admin-layout">
+    <aside class="admin-sidebar">
+      <a href="index.html" class="admin-brand"><span class="brand-mark">L</span> Admin</a>
+      <nav class="admin-nav">
+        <a href="index.html"><i class="fa-solid fa-chart-pie"></i> <span data-i18n="admin.dashboard">Dashboard</span></a>
+        <a href="pedidos.html"><i class="fa-solid fa-box"></i> <span data-i18n="admin.orders">Pedidos</span></a>
+        <a href="produtos.html"><i class="fa-solid fa-tags"></i> <span data-i18n="admin.products">Produtos</span></a>
+        <a href="stock.html"><i class="fa-solid fa-boxes-stacked"></i> <span data-i18n="admin.stock">Gestão de Stock</span></a>
+        <a href="categorias.html"><i class="fa-solid fa-list"></i> <span data-i18n="admin.categories">Categorias</span></a>
+        <a href="mensagens.html"><i class="fa-solid fa-envelope"></i> <span data-i18n="admin.messages">Mensagens</span></a>
+        <a href="servicos.html"><i class="fa-solid fa-screwdriver-wrench"></i> <span data-i18n="admin.services">Serviços</span></a>
+        <a href="suporte.html"><i class="fa-solid fa-headset"></i> <span data-i18n="admin.support">Suporte</span></a>
+        <a href="utilizadores.html" class="active"><i class="fa-solid fa-users"></i> <span data-i18n="admin.users">Utilizadores</span></a>
+        <a href="relatorios.html"><i class="fa-solid fa-chart-line"></i> <span data-i18n="admin.reports">Relatórios</span></a>
+        <a href="../index.html" style="margin-top:20px"><i class="fa-solid fa-arrow-left"></i> <span data-i18n="admin.backToSite">Voltar ao Site</span></a>
+      </nav>
+    </aside>
+
+    <main class="admin-main">
+      <div class="admin-header">
+        <h1 data-i18n="admin.usersTitle">Gestão de Utilizadores</h1>
+        <div class="admin-user"><i class="fa-solid fa-circle-user"></i> <span id="adminName">Admin</span> <button id="adminLogout" class="btn btn-outline" data-i18n="admin.logout">Sair</button></div>
+      </div>
+
+      <div class="card" style="margin-bottom:24px;">
+        <h3 style="margin-bottom:16px;" data-i18n="admin.registerEmployee">Registar Novo Funcionário</h3>
+        <p style="font-size:0.85rem; color:var(--muted); margin-bottom:16px;" data-i18n="admin.employeeDesc">Insere os dados básicos. O email e a palavra-passe serão gerados automaticamente pelo sistema.</p>
+        
+        <form id="newAdminForm" class="grid-2" style="gap:16px;">
+          <label class="field"><span data-i18n="admin.name">Nome Completo</span><input class="input" name="name" required placeholder="Ex: João Silva"></label>
+          <label class="field"><span data-i18n="admin.whatsappNumber">Número de WhatsApp</span><input class="input" type="tel" name="phone" required placeholder="Ex: 258840000000"></label>
+          <label class="field"><span data-i18n="admin.rolePermission">Cargo / Permissão</span>
+            <select class="select" name="role" required>
+              <option value="vendedor">Vendedor</option>
+              <option value="tecnico">Técnico</option>
+              <option value="stock">Gestor de Stock</option>
+              <option value="estafeta">Estafeta / Entregador</option>
+              <option value="admin">Administrador</option>
+            </select>
+          </label>
+          <div style="grid-column: 1 / -1;"><button type="submit" class="btn btn-primary"><i class="fa-solid fa-plus"></i> <span data-i18n="admin.createAccount">Criar conta</span></button></div>
+        </form>
+      </div>
+
+      <div class="table-container">
+        <table class="data-table">
+          <thead><tr><th data-i18n="admin.name">Nome</th><th>Email</th><th data-i18n="admin.phone">Telefone</th><th data-i18n="admin.rolePermission">Cargo</th><th data-i18n="admin.actions">Ações</th></tr></thead>
+          <tbody id="adminUsersRoot"><tr><td colspan="5" style="text-align:center">A ligar à base de dados...</td></tr></tbody>
+        </table>
+      </div>
+    </main>
+  </div>
+
+  <div class="modal-overlay" id="sendModal">
+    <div class="modal-box">
+      <i class="fa-solid fa-circle-check" style="font-size:3rem;color:var(--success);margin-bottom:12px;"></i>
+      <h2 data-i18n="admin.accountCreated">Conta Criada!</h2>
+      <p data-i18n="admin.generatedCredentials">O sistema gerou as credenciais de acesso.</p>
+      
+      <div class="credentials-box">
+        <p><i class="fa-solid fa-envelope" style="color:var(--primary)"></i> <strong>Email:</strong> <span id="modalShowEmail"></span></p>
+        <p><i class="fa-solid fa-key" style="color:var(--primary)"></i> <strong>Palavra-passe:</strong> <span id="modalShowPass"></span></p>
+        <p><i class="fa-brands fa-whatsapp" style="color:#25D366"></i> <strong>WhatsApp:</strong> <span id="modalShowPhone"></span></p>
+      </div>
+
+      <p style="font-size:0.9rem; margin-bottom:12px; font-weight:600;" data-i18n="admin.howToSend">Como queres enviar os dados de acesso?</p>
+      
+      <div class="send-options">
+        <button type="button" class="send-btn" id="btnChooseEmail"><i class="fa-solid fa-envelope" style="color:var(--primary)"></i><span data-i18n="admin.viaEmail">Via Email</span></button>
+        <button type="button" class="send-btn" id="btnChooseWA"><i class="fa-brands fa-whatsapp" style="color:#25D366"></i><span data-i18n="admin.viaWhatsApp">Via WhatsApp</span></button>
+      </div>
+
+      <div class="email-form" id="emailSection"><button type="button" class="btn btn-primary btn-block" id="btnSendEmail"><i class="fa-solid fa-paper-plane"></i> <span data-i18n="admin.openEmailApp">Abrir App de Email</span></button></div>
+      <div class="wa-form" id="waSection"><button type="button" class="btn btn-primary btn-block" id="btnSendWA" style="background:#25D366;border-color:#25D366;"><i class="fa-brands fa-whatsapp"></i> <span data-i18n="admin.openWhatsApp">Abrir WhatsApp</span></button></div>
+
+      <button type="button" class="btn btn-outline" id="btnCloseModal" style="margin-top:20px;width:100%" data-i18n="admin.close">Fechar</button>
+    </div>
+  </div>
+
+  <script src="../assets/js/config.js"></script>
+  <script src="../assets/js/i18n.js"></script>
+  <script src="../assets/js/auth.js"></script>
+  <script src="../assets/js/admin.js"></script>
+  <script>
+    async function waitForSupabase() {
+      return new Promise(function(resolve) {
+        if (window.supabaseClient) { resolve(); return; }
+        var interval = setInterval(function() { if (window.supabaseClient) { clearInterval(interval); resolve(); } }, 100);
+      });
+    }
+
+    document.addEventListener("DOMContentLoaded", async function() {
+      var root = document.getElementById("adminUsersRoot");
+      var modal = document.getElementById("sendModal");
+      var userToSend = null;
+
+      await waitForSupabase();
+
+      function removeAccents(str) { return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/\s+/g, "").toLowerCase(); }
+
+      function getRoleBadge(role) {
+        if (role === "admin") return '<span class="badge-status badge-concluido">Administrador</span>';
+        if (role === "vendedor") return '<span class="badge-status badge-enviado" style="background:#e0f2fe;color:#0369a1">Vendedor</span>';
+        if (role === "tecnico") return '<span class="badge-status badge-enviado" style="background:#fdf4ff;color:#86198f">Técnico</span>';
+        if (role === "stock") return '<span class="badge-status badge-enviado" style="background:#fef9c3;color:#a16207">Gestor Stock</span>';
+        if (role === "estafeta") return '<span class="badge-status badge-enviado" style="background:#ffedd5;color:#c2410c">Estafeta</span>';
+        return '<span class="badge-status badge-pendente">Cliente</span>';
+      }
+
+      async function renderUsers() {
+        root.innerHTML = '<tr><td colspan="5" style="text-align:center">A carregar...</td></tr>';
+        var res = await window.supabaseClient.from('profiles').select('*').order('created_at', { ascending: false });
+        var users = res.data || [];
+        if (users.length === 0) { root.innerHTML = '<tr><td colspan="5" style="text-align:center;padding:20px">Nenhum utilizador.</td></tr>'; return; }
+        
+        root.innerHTML = users.map(function(u) {
+          var isMainAdmin = u.email === "admin@leotech.co.mz";
+          var delBtn = isMainAdmin ? '' : '<button class="btn btn-outline btn-sm del-user" data-id="' + u.id + '" style="color:var(--danger);border-color:#f8d7da;"><i class="fa-solid fa-trash"></i></button>';
+          return '<tr><td><strong>' + (u.name || 'Sem nome') + '</strong></td><td>' + u.email + '</td><td>' + (u.phone || '—') + '</td><td>' + getRoleBadge(u.role) + '</td><td>' + delBtn + '</td></tr>';
+        }).join("");
+      }
+      renderUsers();
+
+      document.getElementById("newAdminForm").addEventListener("submit", async function(e) {
+        e.preventDefault();
+        var form = e.target;
+        var name = form.name.value.trim();
+        var phone = form.phone.value.trim().replace(/\D/g, "");
+        var role = form.role.value;
+        
+        var nameParts = name.split(" ");
+        var baseEmail = nameParts.map(function(p) { return removeAccents(p); }).join(".");
+        var email = baseEmail + "@leotech.com";
+        
+        var checkRes = await window.supabaseClient.from('profiles').select('id').eq('email', email);
+        if (checkRes.data && checkRes.data.length > 0) { email = baseEmail + Math.floor(10 + Math.random() * 90) + "@leotech.com"; }
+
+        var firstName = removeAccents(nameParts[0]);
+        var randomNum = Math.floor(1000 + Math.random() * 9000); 
+        var password = firstName + randomNum;
+
+        var res = await window.supabaseClient.auth.signUp({ email: email, password: password, options: { data: { name: name, phone: phone, role: role } } });
+
+        if (res.error) { alert("Erro ao criar conta: " + res.error.message); return; }
+
+        form.reset(); renderUsers();
+
+        userToSend = { name: name, email: email, password: password, phone: phone, role: role };
+        document.getElementById("modalShowEmail").textContent = email;
+        document.getElementById("modalShowPass").textContent = password;
+        document.getElementById("modalShowPhone").textContent = "+" + phone;
+        
+        document.getElementById("emailSection").classList.remove("active");
+        document.getElementById("waSection").classList.remove("active");
+        document.getElementById("btnChooseEmail").classList.remove("active-email");
+        document.getElementById("btnChooseWA").classList.remove("active-wa");
+        modal.classList.add("active");
+      });
+
+      document.getElementById("btnCloseModal").addEventListener("click", function() { modal.classList.remove("active"); });
+      document.getElementById("btnChooseEmail").addEventListener("click", function() { this.classList.add("active-email"); document.getElementById("btnChooseWA").classList.remove("active-wa"); document.getElementById("emailSection").classList.add("active"); document.getElementById("waSection").classList.remove("active"); });
+      document.getElementById("btnChooseWA").addEventListener("click", function() { this.classList.add("active-wa"); document.getElementById("btnChooseEmail").classList.remove("active-email"); document.getElementById("waSection").classList.add("active"); document.getElementById("emailSection").classList.remove("active"); });
+
+      document.getElementById("btnSendEmail").addEventListener("click", function() {
+        if (!userToSend) return;
+        var subject = encodeURIComponent("Bem-vindo à Leotech - As suas credenciais de acesso");
+        var body = encodeURIComponent("Olá " + userToSend.name + ",\n\nA sua conta foi criada com sucesso.\n\nEmail: " + userToSend.email + "\nPalavra-passe: " + userToSend.password + "\nCargo: " + userToSend.role.toUpperCase() + "\n\nLink: https://leonildokeysse49-creator.github.io/leonildo-keysse/login.html");
+        window.location.href = "mailto:" + userToSend.email + "?subject=" + subject + "&body=" + body;
+        modal.classList.remove("active");
+      });
+
+      document.getElementById("btnSendWA").addEventListener("click", function() {
+        if (!userToSend || !userToSend.phone) return;
+        var text = encodeURIComponent("*Bem-vindo à Leotech!*\n\nOlá " + userToSend.name + ",\nA tua conta foi criada.\n\n*Credenciais:*\nEmail: " + userToSend.email + "\nPalavra-passe: " + userToSend.password + "\n\nAcede aqui: https://leonildokeysse49-creator.github.io/leonildo-keysse/login.html");
+        window.open("https://wa.me/" + userToSend.phone + "?text=" + text, "_blank");
+        modal.classList.remove("active");
+      });
+
+      root.addEventListener("click", async function(e) {
+        var btn = e.target.closest(".del-user");
+        if (!btn) return;
+        if (!confirm("Apagar este utilizador permanentemente da base de dados?")) return;
+        await window.supabaseClient.from('profiles').delete().eq('id', btn.getAttribute("data-id"));
+        renderUsers();
+      });
+    });
+  </script>
+</body>
+</html>

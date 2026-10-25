@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Leotech — Soluções em Informática, Software e Loja</title>
+  <meta name="description" content="Da venda de equipamentos informáticos ao desenvolvimento de sistemas personalizados e suporte técnico especializado. A Leotech tem tudo o que precisas num só lugar.">
+  <link rel="stylesheet" href="assets/css/base.css">
+  <link rel="stylesheet" href="assets/css/layout.css">
+  <link rel="stylesheet" href="assets/css/components.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="index.html" class="brand">
+        <span class="brand-mark">L</span>
+        <span class="brand-name">Leotech</span>
+      </a>
+      <nav class="main-nav" id="mainNav">
+        <a href="index.html" class="active" data-i18n="nav.home">Início</a>
+        <a href="servicos.html" data-i18n="nav.services">Serviços</a>
+        <a href="loja.html" data-i18n="nav.shop">Loja</a>
+        <a href="sobre.html" data-i18n="nav.about">Sobre</a>
+        <a href="contacto.html" data-i18n="nav.contact">Contacto</a>
+      </nav>
+      <div class="header-actions">
+        <div class="lang" id="langSwitch">
+          <button class="lang-btn" type="button" aria-haspopup="true" aria-expanded="false">
+            <i class="fa-solid fa-globe"></i><span id="langLabel">Português</span><i class="fa-solid fa-chevron-down" style="font-size:.7em"></i>
+          </button>
+          <ul class="lang-menu">
+            <li><button type="button" data-lang-btn="pt">Português</button></li>
+            <li><button type="button" data-lang-btn="en">English</button></li>
+          </ul>
+        </div>
+        <a href="carrinho.html" class="icon-btn" aria-label="Carrinho" data-i18n-aria="nav.cart">
+          <i class="fa-solid fa-cart-shopping"></i><span class="cart-count" id="cartCount">0</span>
+        </a>
+        <div id="authWrap"></div>
+        <button class="menu-toggle" id="menuToggle" type="button" aria-label="Menu" aria-controls="mainNav" aria-expanded="false"><i class="fa-solid fa-bars"></i></button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- HERO -->
+    <section class="hero">
+      <div class="container hero-inner">
+        <div class="hero-text">
+          <span class="badge"><i class="fa-solid fa-rocket"></i> <span data-i18n="home.hero.badge">Tecnologia que impulsiona o teu negócio</span></span>
+          <h1 data-i18n="home.hero.title">A Solução Completa em Informática e Software para o Teu Negócio</h1>
+          <p data-i18n="home.hero.subtitle">Da venda de equipamentos informáticos ao desenvolvimento de sistemas personalizados e suporte técnico especializado. A Leotech tem tudo o que precisas num só lugar.</p>
+          <div class="hero-actions">
+            <a href="loja.html" class="btn btn-primary"><i class="fa-solid fa-store"></i> <span data-i18n="home.hero.btnShop">Explorar a Loja</span></a>
+            <a href="contacto.html" class="btn btn-outline"><i class="fa-solid fa-file-invoice"></i> <span data-i18n="home.hero.btnQuote">Pedir Orçamento</span></a>
+          </div>
+        </div>
+        
+        <!-- CARTÃO DOS 3 PILARES -->
+        <aside class="hero-card">
+          <h3 style="margin-bottom:16px;"><i class="fa-solid fa-layer-group" style="color:var(--primary)"></i> <span data-i18n="home.pillars.title">Os Nossos Pilares</span></h3>
+          <div style="display:flex; flex-direction:column; gap:16px;">
+            <div style="display:flex; gap:12px; align-items:flex-start;">
+              <div style="width:40px; height:40px; background:#e7effd; border-radius:10px; display:grid; place-items:center; color:var(--primary); flex-shrink:0;"><i class="fa-solid fa-cart-shopping"></i></div>
+              <div><strong style="display:block; color:var(--ink);" data-i18n="home.pillars.shop">Loja de Produtos</strong><span style="font-size:0.85rem; color:var(--muted);" data-i18n="home.pillars.shopDesc">Computadores, acessórios e redes das melhores marcas.</span></div>
+            </div>
+            <div style="display:flex; gap:12px; align-items:flex-start;">
+              <div style="width:40px; height:40px; background:#e5f7ef; border-radius:10px; display:grid; place-items:center; color:#0e7a4b; flex-shrink:0;"><i class="fa-solid fa-screwdriver-wrench"></i></div>
+              <div><strong style="display:block; color:var(--ink);" data-i18n="home.pillars.services">Serviços Técnicos</strong><span style="font-size:0.85rem; color:var(--muted);" data-i18n="home.pillars.servicesDesc">Manutenção, redes e assistência especializada.</span></div>
+            </div>
+            <div style="display:flex; gap:12px; align-items:flex-start;">
+              <div style="width:40px; height:40px; background:#fdf4ff; border-radius:10px; display:grid; place-items:center; color:#86198f; flex-shrink:0;"><i class="fa-solid fa-code"></i></div>
+              <div><strong style="display:block; color:var(--ink);" data-i18n="home.pillars.dev">Desenvolvimento Web</strong><span style="font-size:0.85rem; color:var(--muted);" data-i18n="home.pillars.devDesc">Sites e sistemas de gestão feitos à medida.</span></div>
+            </div>
+          </div>
+          <a href="servicos.html" class="link-arrow" style="margin-top:20px;"><span data-i18n="home.pillars.link">Conhecer todos os serviços</span> <i class="fa-solid fa-arrow-right"></i></a>
+        </aside>
+      </div>
+    </section>
+
+    <!-- BARRA DE CONFIANÇA -->
+    <div style="background:#0f1728; color:#fff; padding:20px 0;">
+      <div class="container" style="display:flex; justify-content:space-around; flex-wrap:wrap; gap:20px; text-align:center;">
+        <div style="display:flex; align-items:center; gap:10px;"><i class="fa-solid fa-truck-fast" style="font-size:1.5rem; color:var(--accent);"></i> <span style="font-weight:500; font-size:0.9rem;" data-i18n="home.trust.delivery">Entrega Rápida em Maputo</span></div>
+        <div style="display:flex; align-items:center; gap:10px;"><i class="fa-solid fa-shield-halved" style="font-size:1.5rem; color:var(--accent);"></i> <span style="font-weight:500; font-size:0.9rem;" data-i18n="home.trust.payment">Pagamento Seguro (e-Mola/M-Pesa)</span></div>
+        <div style="display:flex; align-items:center; gap:10px;"><i class="fa-solid fa-headset" style="font-size:1.5rem; color:var(--accent);"></i> <span style="font-weight:500; font-size:0.9rem;" data-i18n="home.trust.support">Suporte Técnico Dedicado</span></div>
+      </div>
+    </div>
+
+    <!-- PRODUTOS EM DESTAQUE -->
+    <section class="section section-alt">
+      <div class="container">
+        <div class="section-head" style="display:flex; justify-content:space-between; align-items:flex-end; max-width:100%;">
+          <div>
+            <h2 data-i18n="home.featured.title">Produtos em Destaque</h2>
+            <p data-i18n="home.featured.subtitle">O melhor equipamento para elevar a tua produtividade.</p>
+          </div>
+          <a href="loja.html" class="btn btn-outline btn-sm" style="margin-bottom:10px;" data-i18n="home.featured.btnAll">Ver Toda a Loja</a>
+        </div>
+        <div class="grid-3" id="featuredProducts">
+          <div style="text-align:center; grid-column:1/-1; padding:40px;"><i class="fa-solid fa-spinner fa-spin fa-2x"></i></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PORQUÊ A LEOTECH -->
+    <section class="section">
+      <div class="container">
+        <div class="section-head" style="text-align:center; margin: 0 auto 40px;">
+          <h2 data-i18n="home.why.title">Porquê escolher a Leotech?</h2>
+          <p data-i18n="home.why.subtitle">Somos mais do que uma loja, somos o teu parceiro tecnológico.</p>
+        </div>
+        <div class="grid-3">
+          <article class="card" style="text-align:center;">
+            <div class="card-icon" style="margin:0 auto 16px; background:#fff3cd; color:#856404;"><i class="fa-solid fa-medal"></i></div>
+            <h3 data-i18n="home.why.c1Title">Garantia de Qualidade</h3>
+            <p data-i18n="home.why.c1Desc">Todos os produtos que vendemos passam por um rigoroso controlo de qualidade e têm garantia.</p>
+          </article>
+          <article class="card" style="text-align:center;">
+            <div class="card-icon" style="margin:0 auto 16px; background:#e0f2fe; color:#0369a1;"><i class="fa-solid fa-user-gear"></i></div>
+            <h3 data-i18n="home.why.c2Title">Técnicos Certificados</h3>
+            <p data-i18n="home.why.c2Desc">A nossa equipa é formada e especializada para resolver qualquer desafio técnico.</p>
+          </article>
+          <article class="card" style="text-align:center;">
+            <div class="card-icon" style="margin:0 auto 16px; background:#e5f7ef; color:#0e7a4b;"><i class="fa-solid fa-handshake"></i></div>
+            <h3 data-i18n="home.why.c3Title">Atendimento Próximo</h3>
+            <p data-i18n="home.why.c3Desc">Falamos a tua língua e estamos sempre disponíveis para apoiar o teu negócio.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- DEPOIMENTOS -->
+    <section class="section section-alt">
+      <div class="container">
+        <div class="section-head" style="text-align:center; margin: 0 auto 40px;">
+          <h2 data-i18n="home.testimonials.title">O que dizem os nossos clientes</h2>
+          <p data-i18n="home.testimonials.subtitle">A confiança de quem já trabalha connosco.</p>
+        </div>
+        <div class="grid-3">
+          <article class="card">
+            <p class="quote" data-i18n="home.testimonials.q1">"O FoodManager revolucionou a gestão do nosso restaurante. O controle de mesas e pedidos ficou muito mais eficiente e rápido. Recomendo!"</p>
+            <strong class="quote-author">— Ganito Mussa, Maputo</strong>
+          </article>
+          <article class="card">
+            <p class="quote" data-i18n="home.testimonials.q2">"O sistema FacturacaoPro simplificou toda a nossa emissão de faturas. Rápido, seguro e com relatórios detalhados que facilitam a gestão."</p>
+            <strong class="quote-author">— Rene, Maputo</strong>
+          </article>
+          <article class="card">
+            <p class="quote" data-i18n="home.testimonials.q3">"A gestão de clientes e agendamentos ficou muito mais organizada. O programa de fidelidade é um diferencial incrível para o nosso negócio."</p>
+            <strong class="quote-author">— Narciso, Maputo</strong>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA FINAL -->
+    <section class="section">
+      <div class="container">
+        <div class="cta-band">
+          <div>
+            <h2 data-i18n="home.cta.title">Pronto para modernizar o teu negócio?</h2>
+            <p data-i18n="home.cta.subtitle">Fala com a nossa equipa e descobre como podemos ajudar-te a crescer.</p>
+          </div>
+          <a href="contacto.html" class="btn btn-primary"><i class="fa-solid fa-envelope"></i> <span data-i18n="home.cta.btn">Falar Connosco</span></a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-inner">
+        <div class="footer-brand">
+          <a href="index.html" class="brand brand-light"><span class="brand-mark">L</span><span class="brand-name">Leotech</span></a>
+          <p data-i18n="footer.tagline">Informática, programação e produtos informáticos.</p>
+        </div>
+        <div>
+          <h4 data-i18n="footer.company">Empresa</h4>
+          <ul>
+            <li><a href="sobre.html" data-i18n="footer.about">Sobre nós</a></li>
+            <li><a href="contacto.html" data-i18n="nav.contact">Contacto</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 data-i18n="footer.services">Serviços</h4>
+          <ul>
+            <li><a href="servicos.html" data-i18n="footer.allServices">Todos os serviços</a></li>
+            <li><a href="conta/suporte.html" data-i18n="footer.support">Suporte</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 data-i18n="footer.shop">Loja</h4>
+          <ul>
+            <li><a href="loja.html" data-i18n="footer.categories">Categorias</a></li>
+            <li><a href="carrinho.html" data-i18n="nav.cart">Carrinho</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© <span id="year"></span> Leotech. <span data-i18n="footer.rights">Todos os direitos reservados.</span></span>
+        <span data-i18n="footer.made">Feito em Moçambique</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="assets/js/config.js"></script>
+  <script src="assets/js/i18n.js"></script>
+  <script src="assets/js/auth.js"></script>
+  <script src="assets/js/nav.js"></script>
+  
+  <!-- Script para carregar os 3 produtos em destaque com tradução -->
+  <script>
+    function t(k) { return window.LeotechLang ? window.LeotechLang.t(k) : k; }
+    
+    function getTranslated(id, field, fallback) {
+      var lang = window.LeotechLang ? window.LeotechLang.get() : 'pt';
+      var key = "product." + id + "." + field;
+      if (window.LEOTECH_I18N && window.LEOTECH_I18N[lang] && window.LEOTECH_I18N[lang][key]) {
+        return window.LEOTECH_I18N[lang][key];
+      }
+      return fallback;
+    }
+
+    async function waitForSupabase() {
+      return new Promise(function(resolve) {
+        if (window.supabaseClient) { resolve(); return; }
+        var interval = setInterval(function() { if (window.supabaseClient) { clearInterval(interval); resolve(); } }, 100);
+      });
+    }
+
+    async function loadFeatured() {
+      await waitForSupabase();
+      var grid = document.getElementById("featuredProducts");
+      
+      try {
+        var res = await window.supabaseClient.from('products').select('*').limit(3);
+        var products = res.data || [];
+        
+        if (products.length === 0) {
+          grid.innerHTML = '<p style="grid-column:1/-1; text-align:center;">Ainda não há produtos cadastrados.</p>';
+          return;
+        }
+
+        grid.innerHTML = products.map(function(p) {
+          var pName = getTranslated(p.id, 'name', p.name);
+          var pDesc = getTranslated(p.id, 'desc', p.description);
+          
+          return '' +
+            '<article class="product-card">' +
+              '<a href="produto.html?id=' + p.id + '" style="display:block; position:relative; overflow:hidden;">' +
+                '<div class="product-img">' +
+                  '<div class="img-fallback"><i class="fa-solid fa-box"></i></div>' +
+                  '<img src="' + (p.image_url || '') + '" alt="' + pName + '" loading="lazy" onerror="this.style.display=\'none\'">' +
+                  '<span class="product-badge">' + t("cat." + p.category) + '</span>' +
+                '</div>' +
+              '</a>' +
+              '<div class="product-body">' +
+                '<a href="produto.html?id=' + p.id + '"><h3>' + pName + '</h3></a>' +
+                '<p>' + pDesc + '</p>' +
+                '<div class="product-foot">' +
+                  '<strong>' + Number(p.price).toLocaleString("pt-MZ") + ' MZN</strong>' +
+                  '<a href="produto.html?id=' + p.id + '" class="btn btn-primary btn-sm">' + t("shop.details") + '</a>' +
+                '</div>' +
+              '</div>' +
+            '</article>';
+        }).join("");
+      } catch (err) {
+        grid.innerHTML = '<p style="grid-column:1/-1; text-align:center;">Erro ao carregar produtos.</p>';
+      }
+    }
+
+    document.addEventListener("DOMContentLoaded", loadFeatured);
+    document.addEventListener("languagechange", loadFeatured);
+  </script>
+</body>
+</html>

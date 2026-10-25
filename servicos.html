@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Serviços — Leotech</title>
+  <link rel="stylesheet" href="assets/css/base.css">
+  <link rel="stylesheet" href="assets/css/layout.css">
+  <link rel="stylesheet" href="assets/css/components.css">
+  <style>
+    .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(15, 23, 40, 0.7); backdrop-filter: blur(4px); display: none; justify-content: center; align-items: center; z-index: 1000; }
+    .modal-overlay.active { display: flex; }
+    .modal-box { background: #fff; border-radius: var(--radius); width: 90%; max-width: 500px; padding: 28px; box-shadow: 0 20px 40px rgba(0,0,0,0.2); }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="index.html" class="brand"><span class="brand-mark">L</span><span class="brand-name">Leotech</span></a>
+      <nav class="main-nav" id="mainNav">
+        <a href="index.html" data-i18n="nav.home">Início</a>
+        <a href="servicos.html" class="active" data-i18n="nav.services">Serviços</a>
+        <a href="loja.html" data-i18n="nav.shop">Loja</a>
+        <a href="sobre.html" data-i18n="nav.about">Sobre</a>
+        <a href="contacto.html" data-i18n="nav.contact">Contacto</a>
+      </nav>
+      <div class="header-actions">
+        <div class="lang" id="langSwitch">
+          <button class="lang-btn" type="button" aria-haspopup="true" aria-expanded="false">
+            <i class="fa-solid fa-globe"></i><span id="langLabel">Português</span><i class="fa-solid fa-chevron-down" style="font-size:.7em"></i>
+          </button>
+          <ul class="lang-menu">
+            <li><button type="button" data-lang-btn="pt">Português</button></li>
+            <li><button type="button" data-lang-btn="en">English</button></li>
+          </ul>
+        </div>
+        <a href="carrinho.html" class="icon-btn" aria-label="Carrinho" data-i18n-aria="nav.cart">
+          <i class="fa-solid fa-cart-shopping"></i><span class="cart-count" id="cartCount">0</span>
+        </a>
+        <div id="authWrap"></div>
+        <button class="menu-toggle" id="menuToggle" type="button" aria-label="Menu" aria-controls="mainNav" aria-expanded="false"><i class="fa-solid fa-bars"></i></button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="page-head">
+      <div class="container">
+        <span class="badge"><i class="fa-solid fa-briefcase"></i> <span data-i18n="serv.badge">Serviços</span></span>
+        <h1 data-i18n="serv.title">Soluções tecnológicas para o teu negócio</h1>
+        <p data-i18n="serv.subtitle">Desenvolvimento de software, consultoria de dados, suporte técnico, sites, instalações eléctricas e formação — tudo num só lugar.</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="grid-3" id="servicosGrid">
+          <!-- Preenchido via JavaScript -->
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- MODAL DE PEDIDO DE SERVIÇO -->
+  <div class="modal-overlay" id="serviceModal">
+    <div class="modal-box">
+      <h2 style="margin-bottom:16px; color:var(--primary)" id="modalTitle">Pedir Serviço</h2>
+      <form id="serviceForm">
+        <input type="hidden" id="serviceNameInput" name="service">
+        <label class="field"><span data-i18n="contact.form.name">Nome completo *</span><input class="input" type="text" name="name" required></label>
+        <label class="field"><span data-i18n="contact.form.email">Email *</span><input class="input" type="email" name="email" required></label>
+        <label class="field"><span data-i18n="contact.form.phone">Telefone / WhatsApp</span><input class="input" type="tel" name="phone"></label>
+        <label class="field"><span data-i18n="contact.form.message">Mensagem *</span><textarea class="textarea" name="message" required data-i18n-placeholder="contact.form.messagePh" placeholder="Descreve o que precisas..."></textarea></label>
+        <div style="display:flex; gap:10px; margin-top:20px;">
+          <button type="button" class="btn btn-outline btn-block" id="btnCloseModal" data-i18n="admin.close">Cancelar</button>
+          <button type="submit" class="btn btn-primary btn-block" id="btnSubmitService" data-i18n="contact.form.submit">Enviar Pedido</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-inner">
+        <div class="footer-brand"><a href="index.html" class="brand brand-light"><span class="brand-mark">L</span><span class="brand-name">Leotech</span></a><p data-i18n="footer.tagline">Informática, programação e produtos informáticos.</p></div>
+        <div><h4 data-i18n="footer.company">Empresa</h4><ul><li><a href="sobre.html" data-i18n="footer.about">Sobre nós</a></li><li><a href="contacto.html" data-i18n="nav.contact">Contacto</a></li></ul></div>
+        <div><h4 data-i18n="footer.services">Serviços</h4><ul><li><a href="servicos.html" data-i18n="footer.allServices">Todos os serviços</a></li><li><a href="conta/suporte.html" data-i18n="footer.support">Suporte</a></li></ul></div>
+        <div><h4 data-i18n="footer.shop">Loja</h4><ul><li><a href="loja.html" data-i18n="footer.categories">Categorias</a></li><li><a href="carrinho.html" data-i18n="nav.cart">Carrinho</a></li></ul></div>
+      </div>
+      <div class="footer-bottom">
+        <span>© <span id="year"></span> Leotech. <span data-i18n="footer.rights">Todos os direitos reservados.</span></span>
+        <span data-i18n="footer.made">Feito em Moçambique</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="assets/js/config.js"></script>
+  <script src="assets/js/i18n.js"></script>
+  <script src="assets/js/auth.js"></script>
+  <script src="assets/js/nav.js"></script>
+  <script src="assets/js/servicos.js"></script>
+</body>
+</html>

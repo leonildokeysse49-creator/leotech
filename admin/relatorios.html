@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Relatórios — Admin Leotech</title>
+  <link rel="stylesheet" href="../assets/css/base.css">
+  <link rel="stylesheet" href="../assets/css/layout.css">
+  <link rel="stylesheet" href="../assets/css/components.css">
+  <link rel="stylesheet" href="../assets/css/admin.css">
+  <style>
+    .report-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 24px; }
+    .report-card { background: #fff; border: 1px solid var(--line); border-radius: var(--radius); padding: 24px; }
+    .report-card h3 { margin-bottom: 20px; font-size: 1.1rem; border-bottom: 1px solid var(--line); padding-bottom: 10px; }
+    .bar-chart-item { margin-bottom: 16px; }
+    .bar-chart-label { display: flex; justify-content: space-between; font-size: 0.9rem; margin-bottom: 6px; font-weight: 600; }
+    .bar-chart-track { background: #e2e8f0; height: 12px; border-radius: 999px; overflow: hidden; }
+    .bar-chart-fill { background: var(--primary); height: 100%; border-radius: 999px; }
+  </style>
+</head>
+<body>
+  <div class="admin-layout">
+    <aside class="admin-sidebar">
+      <a href="index.html" class="admin-brand"><span class="brand-mark">L</span> Admin</a>
+      <nav class="admin-nav">
+        <a href="index.html"><i class="fa-solid fa-chart-pie"></i> <span data-i18n="admin.dashboard">Dashboard</span></a>
+        <a href="pedidos.html"><i class="fa-solid fa-box"></i> <span data-i18n="admin.orders">Pedidos</span></a>
+        <a href="produtos.html"><i class="fa-solid fa-tags"></i> <span data-i18n="admin.products">Produtos</span></a>
+        <a href="stock.html"><i class="fa-solid fa-boxes-stacked"></i> <span data-i18n="admin.stock">Gestão de Stock</span></a>
+        <a href="categorias.html"><i class="fa-solid fa-list"></i> <span data-i18n="admin.categories">Categorias</span></a>
+        <a href="mensagens.html"><i class="fa-solid fa-envelope"></i> <span data-i18n="admin.messages">Mensagens</span></a>
+        <a href="servicos.html"><i class="fa-solid fa-screwdriver-wrench"></i> <span data-i18n="admin.services">Serviços</span></a>
+        <a href="suporte.html"><i class="fa-solid fa-headset"></i> <span data-i18n="admin.support">Suporte</span></a>
+        <a href="utilizadores.html"><i class="fa-solid fa-users"></i> <span data-i18n="admin.users">Utilizadores</span></a>
+        <a href="relatorios.html" class="active"><i class="fa-solid fa-chart-line"></i> <span data-i18n="admin.reports">Relatórios</span></a>
+        <a href="../index.html" style="margin-top:20px"><i class="fa-solid fa-arrow-left"></i> <span data-i18n="admin.backToSite">Voltar ao Site</span></a>
+      </nav>
+    </aside>
+
+    <main class="admin-main">
+      <div class="admin-header">
+        <h1 data-i18n="admin.reportsTitle">Relatórios de Vendas</h1>
+        <div class="admin-user"><i class="fa-solid fa-circle-user"></i> <span id="adminName">Admin</span> <button id="adminLogout" class="btn btn-outline" data-i18n="admin.logout">Sair</button></div>
+      </div>
+
+      <div class="report-grid">
+        <div class="report-card">
+          <h3><i class="fa-solid fa-fire" style="color:#ef4444"></i> <span data-i18n="admin.topProducts">Produtos Mais Vendidos</span></h3>
+          <div id="topProductsChart">A carregar...</div>
+        </div>
+        <div class="report-card">
+          <h3><i class="fa-solid fa-chart-pie" style="color:var(--primary)"></i> <span data-i18n="admin.salesByCategory">Vendas por Categoria</span></h3>
+          <div id="categoryChart">A carregar...</div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="../assets/js/config.js"></script>
+  <script src="../assets/js/i18n.js"></script>
+  <script src="../assets/js/auth.js"></script>
+  <script src="../assets/js/admin.js"></script>
+  <script>
+    async function waitForSupabase() {
+      return new Promise(function(resolve) {
+        if (window.supabaseClient) { resolve(); return; }
+        var interval = setInterval(function() { if (window.supabaseClient) { clearInterval(interval); resolve(); } }, 100);
+      });
+    }
+
+    function fmt(v) { return Number(v).toLocaleString("pt-MZ") + " MZN"; }
+
+    document.addEventListener("DOMContentLoaded", async function() {
+      await waitForSupabase();
+
+      // 1. Produtos Mais Vendidos
+      var resItems = await window.supabaseClient.from('order_items').select('product_name, quantity, price');
+      var items = resItems.data || [];
+      
+      var productSales = {};
+      items.forEach(function(i) {
+        if (!productSales[i.product_name]) productSales[i.product_name] = 0;
+        productSales[i.product_name] += i.quantity;
+      });
+
+      var sortedProducts = Object.keys(productSales).map(function(name) {
+        return { name: name, qty: productSales[name] };
+      }).sort(function(a, b) { return b.qty - a.qty; }).slice(0, 5);
+
+      var maxQty = sortedProducts.length > 0 ? sortedProducts[0].qty : 1;
+
+      var prodHtml = sortedProducts.map(function(p) {
+        var pct = (p.qty / maxQty) * 100;
+        return '<div class="bar-chart-item">' +
+          '<div class="bar-chart-label"><span>' + p.name + '</span><span>' + p.qty + ' un.</span></div>' +
+          '<div class="bar-chart-track"><div class="bar-chart-fill" style="width:' + pct + '%"></div></div>' +
+        '</div>';
+      }).join("");
+      
+      document.getElementById("topProductsChart").innerHTML = prodHtml || '<p style="color:var(--muted)" data-i18n="admin.noSales">Sem vendas registadas.</p>';
+
+      // 2. Vendas por Categoria
+      var resProds = await window.supabaseClient.from('products').select('id, category');
+      var prods = resProds.data || [];
+      var productCategoryMap = {};
+      prods.forEach(function(p) {
+        productCategoryMap[p.id] = p.category;
+      });
+
+      var resOrders = await window.supabaseClient.from('orders').select('*, order_items(*)');
+      var orders = resOrders.data || [];
+      
+      var catSales = {};
+      var totalSales = 0;
+      
+      orders.forEach(function(o) {
+        if (o.status === "cancelado") return;
+        if (o.order_items) {
+          o.order_items.forEach(function(item) {
+            var cat = productCategoryMap[item.product_id] || "Outros";
+            var val = item.price * item.quantity;
+            
+            if (!catSales[cat]) catSales[cat] = 0;
+            catSales[cat] += val;
+            totalSales += val;
+          });
+        }
+      });
+
+      var sortedCats = Object.keys(catSales).map(function(cat) {
+        return { cat: cat, val: catSales[cat] };
+      }).sort(function(a, b) { return b.val - a.val; });
+
+      var catHtml = sortedCats.map(function(c) {
+        var pct = (c.val / totalSales) * 100;
+        return '<div class="bar-chart-item">' +
+          '<div class="bar-chart-label"><span>' + c.cat.toUpperCase() + '</span><span>' + fmt(c.val) + ' (' + Math.round(pct) + '%)</span></div>' +
+          '<div class="bar-chart-track"><div class="bar-chart-fill" style="width:' + pct + '%; background:var(--accent)"></div></div>' +
+        '</div>';
+      }).join("");
+
+      document.getElementById("categoryChart").innerHTML = catHtml || '<p style="color:var(--muted)" data-i18n="admin.noCategoryData">Sem dados de categorias.</p>';
+    });
+  </script>
+</body>
+</html>

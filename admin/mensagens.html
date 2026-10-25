@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mensagens — Admin Leotech</title>
+  <link rel="stylesheet" href="../assets/css/base.css">
+  <link rel="stylesheet" href="../assets/css/layout.css">
+  <link rel="stylesheet" href="../assets/css/components.css">
+  <link rel="stylesheet" href="../assets/css/admin.css">
+</head>
+<body>
+  <div class="admin-layout">
+    <aside class="admin-sidebar">
+      <a href="index.html" class="admin-brand"><span class="brand-mark">L</span> Admin</a>
+      <nav class="admin-nav">
+        <a href="index.html"><i class="fa-solid fa-chart-pie"></i> Dashboard</a>
+        <a href="pedidos.html"><i class="fa-solid fa-box"></i> Pedidos</a>
+        <a href="produtos.html"><i class="fa-solid fa-tags"></i> Produtos</a>
+        <a href="stock.html"><i class="fa-solid fa-boxes-stacked"></i> Gestão de Stock</a>
+        <a href="categorias.html"><i class="fa-solid fa-list"></i> Categorias</a>
+        <a href="mensagens.html" class="active"><i class="fa-solid fa-envelope"></i> Mensagens</a>
+        <a href="servicos.html"><i class="fa-solid fa-screwdriver-wrench"></i> Serviços</a>
+        <a href="suporte.html"><i class="fa-solid fa-headset"></i> Suporte</a>
+        <a href="utilizadores.html"><i class="fa-solid fa-users"></i> Utilizadores</a>
+        <a href="relatorios.html"><i class="fa-solid fa-chart-line"></i> Relatórios</a>
+        <a href="../index.html" style="margin-top:20px"><i class="fa-solid fa-arrow-left"></i> Voltar ao Site</a>
+      </nav>
+    </aside>
+
+    <main class="admin-main">
+      <div class="admin-header">
+        <h1>Mensagens de Contacto</h1>
+        <div class="admin-user"><i class="fa-solid fa-circle-user"></i> <span id="adminName">Admin</span> <button id="adminLogout" class="btn btn-outline">Sair</button></div>
+      </div>
+
+      <div class="table-container">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>Data</th>
+              <th>Nome</th>
+              <th>Contacto</th>
+              <th>Assunto / Mensagem</th>
+              <th>Ações</th>
+            </tr>
+          </thead>
+          <tbody id="adminMessagesRoot"><tr><td colspan="5" style="text-align:center">A carregar...</td></tr></tbody>
+        </table>
+      </div>
+    </main>
+  </div>
+
+  <script src="../assets/js/config.js"></script>
+  <script src="../assets/js/i18n.js"></script>
+  <script src="../assets/js/auth.js"></script>
+  <script src="../assets/js/admin.js"></script>
+  <script>
+    async function waitForSupabase() {
+      return new Promise(function(resolve) {
+        if (window.supabaseClient) { resolve(); return; }
+        var interval = setInterval(function() { if (window.supabaseClient) { clearInterval(interval); resolve(); } }, 100);
+      });
+    }
+
+    document.addEventListener("DOMContentLoaded", async function() {
+      var root = document.getElementById("adminMessagesRoot");
+      await waitForSupabase();
+
+      async function renderMessages() {
+        root.innerHTML = '<tr><td colspan="5" style="text-align:center">A carregar...</td></tr>';
+        var res = await window.supabaseClient.from('messages').select('*').order('created_at', { ascending: false });
+        var msgs = res.data || [];
+
+        if (msgs.length === 0) {
+          root.innerHTML = '<tr><td colspan="5" style="text-align:center;padding:20px">Nenhuma mensagem recebida.</td></tr>';
+          return;
+        }
+
+        root.innerHTML = msgs.map(function(m) {
+          return '<tr>' +
+            '<td>' + new Date(m.created_at).toLocaleDateString("pt-MZ") + '</td>' +
+            '<td><strong>' + m.name + '</strong></td>' +
+            '<td>' + m.email + '<br><small>' + (m.phone || '') + '</small></td>' +
+            '<td><strong>' + m.subject + '</strong><br><small style="color:#666">' + m.message + '</small></td>' +
+            '<td><button class="btn btn-outline btn-sm del-msg" data-id="' + m.id + '" style="color:var(--danger);border-color:#f8d7da;"><i class="fa-solid fa-trash"></i></button></td>' +
+          '</tr>';
+        }).join("");
+
+        root.querySelectorAll(".del-msg").forEach(function(btn) {
+          btn.addEventListener("click", async function() {
+            if (!confirm("Apagar esta mensagem?")) return;
+            await window.supabaseClient.from('messages').delete().eq('id', btn.getAttribute("data-id"));
+            renderMessages();
+          });
+        });
+      }
+      renderMessages();
+    });
+  </script>
+</body>
+</html>

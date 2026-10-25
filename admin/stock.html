@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gestão de Stock — Admin Leotech</title>
+  <link rel="stylesheet" href="../assets/css/base.css">
+  <link rel="stylesheet" href="../assets/css/layout.css">
+  <link rel="stylesheet" href="../assets/css/components.css">
+  <link rel="stylesheet" href="../assets/css/admin.css">
+  <style>
+    .stock-alert { background: #fdeaea; color: #b42318; padding: 6px 12px; border-radius: 8px; font-weight: bold; display: inline-block; }
+    .stock-ok { background: #e5f7ef; color: #0e7a4b; padding: 6px 12px; border-radius: 8px; font-weight: bold; display: inline-block; }
+  </style>
+</head>
+<body>
+  <div class="admin-layout">
+    <aside class="admin-sidebar">
+      <a href="index.html" class="admin-brand"><span class="brand-mark">L</span> Admin</a>
+      <nav class="admin-nav">
+        <a href="index.html"><i class="fa-solid fa-chart-pie"></i> Dashboard</a>
+        <a href="pedidos.html"><i class="fa-solid fa-box"></i> Pedidos</a>
+        <a href="produtos.html"><i class="fa-solid fa-tags"></i> Produtos</a>
+        <a href="stock.html" class="active"><i class="fa-solid fa-boxes-stacked"></i> Gestão de Stock</a>
+        <a href="servicos.html"><i class="fa-solid fa-screwdriver-wrench"></i> Serviços</a>
+        <a href="suporte.html"><i class="fa-solid fa-headset"></i> Suporte</a>
+        <a href="utilizadores.html"><i class="fa-solid fa-users"></i> Utilizadores</a>
+        <a href="../index.html" style="margin-top:20px"><i class="fa-solid fa-arrow-left"></i> Voltar ao Site</a>
+      </nav>
+    </aside>
+
+    <main class="admin-main">
+      <div class="admin-header">
+        <h1>Controlo de Inventário</h1>
+        <div class="admin-user"><i class="fa-solid fa-circle-user"></i> <span id="adminName">Admin</span> <button id="adminLogout" class="btn btn-outline">Sair</button></div>
+      </div>
+
+      <div class="table-container">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>Produto</th>
+              <th>Categoria</th>
+              <th>Preço</th>
+              <th>Stock Atual</th>
+              <th>Atualizar Stock</th>
+            </tr>
+          </thead>
+          <tbody id="adminStockRoot"><tr><td colspan="5" style="text-align:center">A carregar stock...</td></tr></tbody>
+        </table>
+      </div>
+    </main>
+  </div>
+
+  <script src="../assets/js/config.js"></script>
+  <script src="../assets/js/i18n.js"></script>
+  <script src="../assets/js/auth.js"></script>
+  <script src="../assets/js/admin.js"></script>
+  <script>
+    async function waitForSupabase() {
+      return new Promise(function(resolve) {
+        if (window.supabaseClient) { resolve(); return; }
+        var interval = setInterval(function() { if (window.supabaseClient) { clearInterval(interval); resolve(); } }, 100);
+      });
+    }
+
+    document.addEventListener("DOMContentLoaded", async function() {
+      var root = document.getElementById("adminStockRoot");
+      await waitForSupabase();
+
+      async function renderStock() {
+        root.innerHTML = '<tr><td colspan="5" style="text-align:center">A carregar...</td></tr>';
+        var res = await window.supabaseClient.from('products').select('*').order('name');
+        var products = res.data || [];
+
+        if (products.length === 0) {
+          root.innerHTML = '<tr><td colspan="5" style="text-align:center;padding:20px">Nenhum produto registado.</td></tr>';
+          return;
+        }
+
+        root.innerHTML = products.map(function(p) {
+          var stock = p.stock_quantity || 0;
+          var badge = stock <= 5 
+            ? '<span class="stock-alert"><i class="fa-solid fa-triangle-exclamation"></i> ' + stock + ' un. (Baixo)</span>' 
+            : '<span class="stock-ok"><i class="fa-solid fa-check"></i> ' + stock + ' un.</span>';
+
+          return '<tr>' +
+            '<td><strong>' + p.name + '</strong></td>' +
+            '<td>' + p.category + '</td>' +
+            '<td>' + Number(p.price).toLocaleString("pt-MZ") + ' MZN</td>' +
+            '<td>' + badge + '</td>' +
+            '<td>' +
+              '<div style="display:flex; gap:8px; align-items:center;">' +
+                '<input type="number" class="input" style="width:80px; padding:6px;" id="stock-input-' + p.id + '" value="' + stock + '" min="0">' +
+                '<button class="btn btn-primary btn-sm update-stock" data-id="' + p.id + '"><i class="fa-solid fa-save"></i> Guardar</button>' +
+              '</div>' +
+            '</td>' +
+          '</tr>';
+        }).join("");
+
+        root.querySelectorAll(".update-stock").forEach(function(btn) {
+          btn.addEventListener("click", async function() {
+            var id = btn.getAttribute("data-id");
+            var newStock = parseInt(document.getElementById("stock-input-" + id).value);
+            
+            btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i>';
+            btn.disabled = true;
+
+            await window.supabaseClient.from('products').update({ stock_quantity: newStock }).eq('id', id);
+            
+            btn.innerHTML = '<i class="fa-solid fa-check"></i> Salvo';
+            btn.style.background = "var(--success)";
+            setTimeout(function() {
+              renderStock();
+            }, 1000);
+          });
+        });
+      }
+      renderStock();
+    });
+  </script>
+</body>
+</html>

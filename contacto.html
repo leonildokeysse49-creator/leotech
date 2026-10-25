@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contacto — Leotech</title>
+  <meta name="description" content="Fala com a Leotech: pedidos de serviço, produtos, suporte e orçamentos.">
+  <link rel="stylesheet" href="assets/css/base.css">
+  <link rel="stylesheet" href="assets/css/layout.css">
+  <link rel="stylesheet" href="assets/css/components.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="index.html" class="brand">
+        <span class="brand-mark">L</span>
+        <span class="brand-name">Leotech</span>
+      </a>
+      <nav class="main-nav" id="mainNav">
+        <a href="index.html" data-i18n="nav.home">Início</a>
+        <a href="servicos.html" data-i18n="nav.services">Serviços</a>
+        <a href="loja.html" data-i18n="nav.shop">Loja</a>
+        <a href="sobre.html" data-i18n="nav.about">Sobre</a>
+        <a href="contacto.html" data-i18n="nav.contact">Contacto</a>
+      </nav>
+      <div class="header-actions">
+        <div class="lang" id="langSwitch">
+          <button class="lang-btn" type="button" aria-haspopup="true" aria-expanded="false">
+            <i class="fa-solid fa-globe"></i><span id="langLabel">Português</span><i class="fa-solid fa-chevron-down" style="font-size:.7em"></i>
+          </button>
+          <ul class="lang-menu">
+            <li><button type="button" data-lang-btn="pt">Português</button></li>
+            <li><button type="button" data-lang-btn="en">English</button></li>
+          </ul>
+        </div>
+        <a href="carrinho.html" class="icon-btn" aria-label="Carrinho" data-i18n-aria="nav.cart">
+          <i class="fa-solid fa-cart-shopping"></i><span class="cart-count" id="cartCount">0</span>
+        </a>
+        <div id="authWrap"></div>
+        <button class="menu-toggle" id="menuToggle" type="button" aria-label="Menu" aria-controls="mainNav" aria-expanded="false"><i class="fa-solid fa-bars"></i></button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="page-head">
+      <div class="container">
+        <span class="badge"><i class="fa-solid fa-envelope"></i> <span data-i18n="contact.badge">Estamos aqui para ajudar</span></span>
+        <h1 data-i18n="contact.title">Fala connosco</h1>
+        <p data-i18n="contact.subtitle">Escolhe o assunto, indica a categoria e descreve o que precisas. Respondemos o mais rápido possível.</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container contact-grid">
+        <form class="card contact-form" id="contactForm" novalidate>
+          <h2 data-i18n="contact.form.title">Enviar mensagem</h2>
+          <div class="form-row">
+            <label class="field">
+              <span data-i18n="contact.form.name">Nome completo *</span>
+              <input class="input" type="text" name="nome" required data-i18n-placeholder="contact.form.namePh" placeholder="O teu nome">
+            </label>
+            <label class="field">
+              <span data-i18n="contact.form.email">Email *</span>
+              <input class="input" type="email" name="email" required data-i18n-placeholder="contact.form.emailPh" placeholder="exemplo@email.com">
+            </label>
+          </div>
+          <div class="form-row">
+            <label class="field">
+              <span data-i18n="contact.form.phone">Telefone / WhatsApp</span>
+              <input class="input" type="tel" name="telefone" data-i18n-placeholder="contact.form.phonePh" placeholder="+258 ...">
+            </label>
+            <label class="field">
+              <span data-i18n="contact.form.subject">Assunto *</span>
+              <select class="select" name="assunto" id="assunto" required>
+                <option value="" data-i18n="contact.form.subjectPh">Seleciona o assunto</option>
+                <option value="servico" data-i18n="contact.subject.service">Serviço</option>
+                <option value="sistema" data-i18n="contact.subject.system">Sistema</option>
+                <option value="produto" data-i18n="contact.subject.product">Produto</option>
+                <option value="suporte" data-i18n="contact.subject.support">Suporte técnico</option>
+                <option value="orcamento" data-i18n="contact.subject.quote">Pedido de orçamento</option>
+                <option value="outro" data-i18n="contact.subject.other">Outro</option>
+              </select>
+            </label>
+          </div>
+          <label class="field" id="categoriaField" hidden>
+            <span data-i18n="contact.form.category">Categoria</span>
+            <select class="select" name="categoria" id="categoria">
+              <option value="" data-i18n="contact.form.categoryPh">Seleciona a categoria</option>
+            </select>
+          </label>
+          <label class="field">
+            <span data-i18n="contact.form.message">Mensagem *</span>
+            <textarea class="textarea" name="mensagem" required data-i18n-placeholder="contact.form.messagePh" placeholder="Descreve o que precisas..."></textarea>
+          </label>
+          <div class="form-foot">
+            <p class="form-note" data-i18n="contact.form.note">Os campos com * são obrigatórios.</p>
+            <button type="submit" class="btn btn-primary" id="submitBtn"><i class="fa-solid fa-paper-plane"></i> <span data-i18n="contact.form.submit">Enviar mensagem</span></button>
+          </div>
+          <p class="form-status" id="formStatus" role="status" aria-live="polite" hidden></p>
+        </form>
+
+        <aside class="contact-info">
+          <div class="card info-card">
+            <h3 data-i18n="contact.info.title">Informação de contacto</h3>
+            <ul class="info-list">
+              <li>
+                <span class="info-icon"><i class="fa-solid fa-location-dot"></i></span>
+                <div><strong data-i18n="contact.info.addressLabel">Endereço</strong><p data-i18n="contact.info.address">Maputo, Moçambique</p></div>
+              </li>
+              <li>
+                <span class="info-icon"><i class="fa-solid fa-phone"></i></span>
+                <div>
+                  <strong data-i18n="contact.info.phoneLabel">Telefone</strong>
+                  <p>
+                    <a href="tel:+258853217149">+258 85 321 7149</a><br>
+                    <a href="https://wa.me/258853217149" target="_blank" style="color:#25D366;font-weight:bold;font-size:0.9rem;margin-top:4px;display:inline-block;">
+                      <i class="fa-brands fa-whatsapp"></i> Falar no WhatsApp
+                    </a>
+                  </p>
+                </div>
+              </li>
+              <li>
+                <span class="info-icon"><i class="fa-solid fa-envelope"></i></span>
+                <div><strong data-i18n="contact.info.emailLabel">Email</strong><p><a href="mailto:Leonildokeysse49@gmail.com">Leonildokeysse49@gmail.com</a></p></div>
+              </li>
+              <li>
+                <span class="info-icon"><i class="fa-solid fa-clock"></i></span>
+                <div><strong data-i18n="contact.info.hoursLabel">Horário</strong><p data-i18n="contact.info.hours">Segunda a sexta, 08h00–18h00</p></div>
+              </li>
+            </ul>
+          </div>
+          <div class="card info-card info-accent">
+            <h3 data-i18n="contact.quick.title">Atalhos úteis</h3>
+            <ul class="quick-links">
+              <li><a href="servicos.html"><i class="fa-solid fa-arrow-right"></i> <span data-i18n="contact.quick.services">Ver serviços disponíveis</span></a></li>
+              <li><a href="loja.html"><i class="fa-solid fa-arrow-right"></i> <span data-i18n="contact.quick.shop">Explorar a loja</span></a></li>
+              <li><a href="conta/suporte.html"><i class="fa-solid fa-arrow-right"></i> <span data-i18n="contact.quick.support">Abrir pedido de suporte</span></a></li>
+            </ul>
+          </div>
+        </aside>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-inner">
+        <div class="footer-brand"><a href="index.html" class="brand brand-light"><span class="brand-mark">L</span><span class="brand-name">Leotech</span></a><p data-i18n="footer.tagline">Informática, programação e produtos informáticos.</p></div>
+        <div><h4 data-i18n="footer.company">Empresa</h4><ul><li><a href="sobre.html" data-i18n="footer.about">Sobre nós</a></li><li><a href="contacto.html" data-i18n="nav.contact">Contacto</a></li></ul></div>
+        <div><h4 data-i18n="footer.services">Serviços</h4><ul><li><a href="servicos.html" data-i18n="footer.allServices">Todos os serviços</a></li><li><a href="conta/suporte.html" data-i18n="footer.support">Suporte</a></li></ul></div>
+        <div><h4 data-i18n="footer.shop">Loja</h4><ul><li><a href="loja.html" data-i18n="footer.categories">Categorias</a></li><li><a href="carrinho.html" data-i18n="nav.cart">Carrinho</a></li></ul></div>
+      </div>
+      <div class="footer-bottom">
+        <span>© <span id="year"></span> Leotech. <span data-i18n="footer.rights">Todos os direitos reservados.</span></span>
+        <span data-i18n="footer.made">Feito em Moçambique</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="assets/js/config.js"></script>
+  <script src="assets/js/i18n.js"></script>
+  <script src="assets/js/auth.js"></script>
+  <script src="assets/js/nav.js"></script>
+  <script src="assets/js/contacto.js"></script>
+</body>
+</html>

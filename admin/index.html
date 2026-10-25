@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard — Admin Leotech</title>
+  <link rel="stylesheet" href="../assets/css/base.css">
+  <link rel="stylesheet" href="../assets/css/layout.css">
+  <link rel="stylesheet" href="../assets/css/components.css">
+  <link rel="stylesheet" href="../assets/css/admin.css">
+  <style>
+    .danger-link {
+      font-size: 0.75rem; color: #64748b; margin-top: 20px; padding: 10px;
+      display: flex; align-items: center; gap: 8px; transition: 0.2s;
+      cursor: pointer; border-radius: 8px;
+    }
+    .danger-link:hover { color: #ef4444; background: rgba(239, 68, 68, 0.1); }
+  </style>
+</head>
+<body>
+  <div class="admin-layout">
+    <aside class="admin-sidebar">
+      <a href="index.html" class="admin-brand"><span class="brand-mark">L</span> Admin</a>
+      <nav class="admin-nav">
+        <a href="index.html" class="active"><i class="fa-solid fa-chart-pie"></i> Dashboard</a>
+        <a href="pedidos.html"><i class="fa-solid fa-box"></i> Pedidos</a>
+        <a href="produtos.html"><i class="fa-solid fa-tags"></i> Produtos</a>
+        <a href="stock.html"><i class="fa-solid fa-boxes-stacked"></i> Gestão de Stock</a>
+        <a href="categorias.html"><i class="fa-solid fa-list"></i> Categorias</a>
+        <a href="mensagens.html"><i class="fa-solid fa-envelope"></i> Mensagens</a>
+        <a href="servicos.html"><i class="fa-solid fa-screwdriver-wrench"></i> Serviços</a>
+        <a href="suporte.html"><i class="fa-solid fa-headset"></i> Suporte</a>
+        <a href="utilizadores.html"><i class="fa-solid fa-users"></i> Utilizadores</a>
+        <a href="relatorios.html"><i class="fa-solid fa-chart-line"></i> Relatórios</a>
+        <a href="../index.html" style="margin-top:20px"><i class="fa-solid fa-arrow-left"></i> Voltar ao Site</a>
+      </nav>
+      
+      <div class="danger-link" id="resetDataBtn">
+        <i class="fa-solid fa-trash-can"></i> Limpar Dados de Teste
+      </div>
+    </aside>
+
+    <main class="admin-main">
+      <div class="admin-header">
+        <h1>Visão Geral</h1>
+        <div class="admin-user">
+          <i class="fa-solid fa-circle-user"></i> <span id="adminName">Admin</span>
+          <button id="adminLogout" class="btn btn-outline">Sair</button>
+        </div>
+      </div>
+
+      <div class="stats-grid">
+        <div class="stat-card"><div class="stat-icon blue"><i class="fa-solid fa-cart-shopping"></i></div><div class="stat-info"><h3 id="statOrders">0</h3><p>Total de Pedidos</p></div></div>
+        <div class="stat-card"><div class="stat-icon green"><i class="fa-solid fa-money-bill-trend-up"></i></div><div class="stat-info"><h3 id="statSales">0 MZN</h3><p>Vendas Totais</p></div></div>
+        <div class="stat-card"><div class="stat-icon yellow"><i class="fa-solid fa-clock"></i></div><div class="stat-info"><h3 id="statPending">0</h3><p>Pendentes</p></div></div>
+        <div class="stat-card"><div class="stat-icon red"><i class="fa-solid fa-ticket"></i></div><div class="stat-info"><h3 id="statTickets">0</h3><p>Tickets</p></div></div>
+      </div>
+
+      <h2 style="margin-bottom:16px;font-size:1.2rem">Últimos Pedidos</h2>
+      <div class="table-container">
+        <table class="data-table">
+          <thead><tr><th>ID</th><th>Cliente</th><th>Data</th><th>Total</th></tr></thead>
+          <tbody id="recentOrders"></tbody>
+        </table>
+      </div>
+    </main>
+  </div>
+
+  <script src="../assets/js/config.js"></script>
+  <script src="../assets/js/i18n.js"></script>
+  <script src="../assets/js/auth.js"></script>
+  <script src="../assets/js/admin.js"></script>
+  <script>
+    document.getElementById("resetDataBtn").addEventListener("click", async function() {
+      var code = prompt("Atenção: Esta ação apaga pedidos, mensagens, tickets e repõe os produtos originais.\nPara confirmar, introduz a palavra-passe de segurança:");
+      
+      if (code === "admin") {
+        try {
+          // Apagar dados das tabelas na nuvem
+          await window.supabaseClient.from('orders').delete().neq('id', '0');
+          await window.supabaseClient.from('order_items').delete().neq('id', '0');
+          await window.supabaseClient.from('messages').delete().neq('id', '0');
+          await window.supabaseClient.from('tickets').delete().neq('id', '0');
+          
+          alert("Dados apagados com sucesso da nuvem!");
+          window.location.reload();
+        } catch (err) {
+          alert("Erro ao limpar dados: " + err.message);
+        }
+      } else if (code !== null) {
+        alert("Palavra-passe incorreta.");
+      }
+    });
+  </script>
+</body>
+</html>
