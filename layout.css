@@ -11,7 +11,7 @@
 .header-inner { 
   display: flex; 
   align-items: center; 
-  justify-content: space-between; /* Separa a marca dos botões */
+  justify-content: space-between; /* Separa o Logo do resto */
   gap: 10px; 
   height: var(--header-h); 
   width: 100%;
@@ -34,51 +34,29 @@
 .main-nav a:hover { color: var(--ink); background: #eef3fb; }
 .main-nav a.active { color: var(--primary); background: #e7effd; font-weight: 600; }
 
-.header-actions { display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
-.menu-toggle { display: none; font-size: 1.4rem; padding: 8px 12px; border-radius: 10px; color: var(--ink); }
+.header-actions { display: flex; align-items: center; gap: 6px; flex-shrink: 0; }
+.menu-toggle { display: none; font-size: 1.3rem; padding: 8px 10px; border-radius: 10px; color: var(--ink); }
 .menu-toggle:hover { background: #eef3fb; }
 
-/* ---------- Hero ---------- */
-.hero {
-  padding: 72px 0 56px;
-  background:
-    radial-gradient(900px 380px at 82% -10%, #dbe9ff 0%, transparent 60%),
-    radial-gradient(700px 300px at 10% 100%, #d9f7ef 0%, transparent 60%),
-    linear-gradient(180deg, #f9fbff, var(--bg));
-}
+/* ---------- Hero e Resto do Site (Mantidos iguais) ---------- */
+.hero { padding: 72px 0 56px; background: radial-gradient(900px 380px at 82% -10%, #dbe9ff 0%, transparent 60%), radial-gradient(700px 300px at 10% 100%, #d9f7ef 0%, transparent 60%), linear-gradient(180deg, #f9fbff, var(--bg)); }
 .hero-inner { display: grid; grid-template-columns: 1.15fr .85fr; gap: 48px; align-items: center; }
 .hero-text p { margin-top: 16px; max-width: 56ch; }
 .hero-actions { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 28px; }
-
-.hero-card {
-  background: var(--surface); border: 1px solid var(--line);
-  border-radius: 18px; box-shadow: var(--shadow); padding: 26px;
-}
+.hero-card { background: var(--surface); border: 1px solid var(--line); border-radius: 18px; box-shadow: var(--shadow); padding: 26px; }
 .hero-card h3 { margin-bottom: 14px; display: flex; align-items: center; gap: 8px; }
-
-/* ---------- Secções ---------- */
 .section { padding: 64px 0; }
 .section-alt { background: #fbfcff; border-block: 1px solid var(--line); }
 .section-head { max-width: 640px; margin-bottom: 32px; }
 .section-head p { margin-top: 10px; }
 .section-actions { margin-top: 32px; }
-
 .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
 .grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
-
-/* ---------- CTA ---------- */
-.cta-band {
-  display: flex; align-items: center; justify-content: space-between; gap: 24px;
-  background: linear-gradient(120deg, #0b5ed7, #0847a6);
-  color: #fff; padding: 40px 44px; border-radius: 20px;
-  box-shadow: 0 16px 40px rgba(11, 94, 215, .25);
-}
+.cta-band { display: flex; align-items: center; justify-content: space-between; gap: 24px; background: linear-gradient(120deg, #0b5ed7, #0847a6); color: #fff; padding: 40px 44px; border-radius: 20px; box-shadow: 0 16px 40px rgba(11, 94, 215, .25); }
 .cta-band h2 { color: #fff; }
 .cta-band p { color: rgba(255, 255, 255, .88); margin-top: 8px; }
 .cta-band .btn-primary { background: #fff; color: var(--primary); box-shadow: 0 8px 20px rgba(0,0,0,.15); }
 .cta-band .btn-primary:hover { background: #f0f4fc; }
-
-/* ---------- Footer ---------- */
 .site-footer { background: #0f1728; color: #c7d2e5; margin-top: 60px; }
 .footer-inner { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 32px; padding: 56px 0 32px; }
 .site-footer h4 { color: #fff; font-size: .95rem; margin-bottom: 14px; }
@@ -87,14 +65,11 @@
 .site-footer a:hover { color: #fff; }
 .footer-brand p { margin-top: 12px; color: #8fa0bd; max-width: 32ch; }
 .brand-light .brand-name { color: #fff; }
-.footer-bottom {
-  border-top: 1px solid #22304a; padding: 18px 0;
-  display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap;
-  font-size: .875rem; color: #8fa0bd;
-}
+.footer-bottom { border-top: 1px solid #22304a; padding: 18px 0; display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; font-size: .875rem; color: #8fa0bd; }
 
-/* ---------- Responsivo ---------- */
+/* ---------- Responsivo (A CORREÇÃO DO CABEÇALHO) ---------- */
 @media (max-width: 940px) {
+  /* Esconde o menu de links normal */
   .main-nav {
     position: fixed; top: var(--header-h); left: 0; right: 0;
     flex-direction: column; gap: 4px;
@@ -104,8 +79,39 @@
   }
   .main-nav.open { display: flex; }
   .main-nav a { padding: 12px 14px; border-radius: 10px; }
-  .menu-toggle { display: block; } /* FORÇA O MENU HAMBÚRGUER A APARECER */
   
+  /* Faz aparecer o botão do Menu (☰) */
+  .menu-toggle { display: block; }
+
+  /* --- COMPACTA OS BOTÕES DO TOPO NO TELEMÓVEL --- */
+  /* 1. Esconde a palavra "Português" e deixa só o ícone do mundo */
+  .lang-btn #langLabel, .lang-btn .fa-chevron-down { display: none; }
+  .lang-btn { padding: 8px 10px; }
+
+  /* 2. Esconde a palavra "Entrar" e transforma o botão num ícone redondo */
+  .header-actions .btn-outline { 
+    padding: 0; 
+    width: 40px; 
+    height: 40px; 
+    border-radius: 50%; 
+    display: grid; 
+    place-items: center; 
+    font-size: 0; /* Esconde o texto */
+  }
+  /* Mete um ícone de utilizador em vez da palavra "Entrar" */
+  .header-actions .btn-outline::before {
+    content: "\f2f6"; /* Código do ícone de utilizador do FontAwesome */
+    font-family: "Font Awesome 6 Free";
+    font-weight: 900;
+    font-size: 1rem;
+    color: var(--ink);
+  }
+
+  /* 3. Esconde o nome do utilizador se estiver logado e deixa só a carinha */
+  .user-btn span, .user-btn i.fa-chevron-down { display: none; }
+  .user-btn { padding: 8px 10px; }
+
+  /* --- RESTO DO SITE NO TELEMÓVEL --- */
   .hero-inner { grid-template-columns: 1fr; gap: 32px; }
   .hero { padding: 48px 0 40px; }
   .grid-3, .grid-2 { grid-template-columns: 1fr; }
@@ -115,14 +121,5 @@
 
 @media (max-width: 520px) {
   .footer-inner { grid-template-columns: 1fr; }
-  
-  /* Transforma a barra de topo em ícones no telemóvel */
-  .lang-btn { padding: 8px; }
-  .lang-btn #langLabel, .lang-btn .fa-chevron-down { display: none; } /* Esconde a palavra "Português" */
-  
-  .header-actions .btn-outline { padding: 8px 12px; }
-  .header-actions .btn-outline span { display: none; } /* Esconde a palavra "Entrar" */
-  
-  .user-btn { padding: 8px 12px; }
-  .user-btn span { display: none; } /* Esconde o nome do utilizador */
+  .header-inner { padding-inline: 10px; }
 }
