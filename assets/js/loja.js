@@ -3,11 +3,11 @@
 
   var state = { cat: "all", search: "", sort: "name" };
   var allProducts = [];
+  var allCategories = [];
 
   function t(k) { return window.LeotechLang ? window.LeotechLang.t(k) : k; }
   function fmt(v) { return Number(v).toLocaleString("pt-MZ") + " MZN"; }
 
-  // Vai buscar a tradução do produto ao i18n.js
   function getTranslated(id, field, fallback) {
     var lang = window.LeotechLang ? window.LeotechLang.get() : 'pt';
     var key = "product." + id + "." + field;
@@ -24,7 +24,8 @@
     });
   }
 
-  async function fetchProducts() {
+  // 1. IR BUSCAR AS CATEGORIAS E PRODUTOS À NUVEM
+  async function fetchData() {
     var grid = document.getElementById("productGrid");
     if (!grid) return;
     
@@ -33,23 +34,64 @@
     await waitForSupabase();
     
     try {
-      var res = await window.supabaseClient.from('products').select('*').order('name');
-      if (res.error) throw res.error;
+      // Vai buscar as categorias
+      var resCats = await window.supabaseClient.from('categories').select('*').order('name');
+      allCategories = resCats.data || [];
+
+      // Vai buscar os produtos
+      var resProds = await window.supabaseClient.from('products').select('*').order('name');
+      if (resProds.error) throw resProds.error;
       
-      allProducts = res.data.map(function(p) {
+      allProducts = resProds.data.map(function(p) {
         return {
           id: p.id, name: p.name, desc: p.description, price: Number(p.price),
           category: p.category, img: p.image_url, icon: p.icon, stock: p.stock_quantity
         };
       });
-      render();
+
+      renderCategoryFilters(); // Desenha os botões
+      renderProducts();        // Desenha os produtos
     } catch (err) {
-      console.error("Erro ao carregar produtos:", err);
+      console.error("Erro ao carregar dados:", err);
       grid.innerHTML = '<p class="empty" style="color:var(--danger)">Erro ao carregar a loja.</p>';
     }
   }
 
-  function render() {
+  // 2. DESENHAR OS BOTÕES DINAMICAMENTE
+  function renderCategoryFilters() {
+    var container = document.getElementById("shopCategories");
+    if (!container) return;
+
+    var html = '<button type="button" class="chip ' + (state.cat === "all" ? "active" : "") + '" data-cat="all">' + t("shop.all") + '</button>';
+    
+    allCategories.forEach(function(c) {
+      // Transforma "Telemóveis" numa chave tipo "telemoveis" para procurar a tradução
+      var keyName = c.name.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/\s+/g, "");
+      var transKey = "cat." + keyName;
+      var displayName = t(transKey);
+
+      // Se não encontrar a tradução, mostra o nome original que veio da BD
+      if (displayName === transKey) displayName = c.name;
+
+      var isActive = state.cat === c.name.toLowerCase() ? "active" : "";
+      html += '<button type="button" class="chip ' + isActive + '" data-cat="' + c.name.toLowerCase() + '">' + displayName + '</button>';
+    });
+
+    container.innerHTML = html;
+
+    // Adiciona o evento de clique a cada botão
+    container.querySelectorAll("[data-cat]").forEach(function(btn) {
+      btn.addEventListener("click", function() {
+        container.querySelectorAll(".chip").forEach(function(b) { b.classList.remove("active"); });
+        btn.classList.add("active");
+        state.cat = btn.getAttribute("data-cat");
+        renderProducts();
+      });
+    });
+  }
+
+  // 3. DESENHAR OS PRODUTOS (Lógica antiga mantida)
+  function renderProducts() {
     var grid = document.getElementById("productGrid");
     if (!grid) return;
 
@@ -75,12 +117,15 @@
     grid.innerHTML = list.map(function (p) {
       var outOfStock = p.stock <= 0;
       var btnHtml = outOfStock 
-        ? '<button type="button" class="btn btn-outline btn-sm" disabled style="opacity:0.5"><i class="fa-solid fa-ban"></i> Esgotado</button>'
+        ? '<button type="button" class="btn btn-outline btn-sm" disabled style="opacity:0.5"><i class="fa-solid fa-ban"></i> ' + t("shop.outOfStock") + '</button>'
         : '<button type="button" class="btn btn-primary btn-sm add-cart" data-id="' + p.id + '"><i class="fa-solid fa-cart-plus"></i> ' + t("shop.addCart") + '</button>';
 
-      // Traduzir o nome e a descrição
       var pName = getTranslated(p.id, 'name', p.name);
       var pDesc = getTranslated(p.id, 'desc', p.desc);
+
+      // Pega o nome da categoria e tenta traduzir para o badge do produto
+      var catKey = p.category.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/\s+/g, "");
+      var catDisplay = t("cat." + catKey) !== "cat." + catKey ? t("cat." + catKey) : p.category;
 
       return '' +
         '<article class="product-card" data-id="' + p.id + '">' +
@@ -88,7 +133,7 @@
             '<div class="product-img">' +
               '<div class="img-fallback"><i class="fa-solid ' + p.icon + '"></i></div>' +
               '<img src="' + p.img + '" alt="' + pName + '" loading="lazy" onerror="this.style.display=\'none\'">' +
-              '<span class="product-badge">' + t("cat." + p.category) + '</span>' +
+              '<span class="product-badge">' + catDisplay + '</span>' +
             '</div>' +
           '</a>' +
           '<div class="product-body">' +
@@ -134,19 +179,12 @@
     }, 2200);
   }
 
-  function initFilters() {
-    document.querySelectorAll("[data-cat]").forEach(function (btn) {
-      btn.addEventListener("click", function () {
-        document.querySelectorAll("[data-cat]").forEach(function (b) { b.classList.remove("active"); });
-        btn.classList.add("active");
-        state.cat = btn.getAttribute("data-cat");
-        render();
-      });
-    });
+  // 4. INICIALIZAÇÃO (Pesquisa e Ordenação)
+  function initControls() {
     var s = document.getElementById("shopSearch");
-    if (s) s.addEventListener("input", function (e) { state.search = e.target.value; render(); });
+    if (s) s.addEventListener("input", function (e) { state.search = e.target.value; renderProducts(); });
     var so = document.getElementById("shopSort");
-    if (so) so.addEventListener("change", function (e) { state.sort = e.target.value; render(); });
+    if (so) so.addEventListener("change", function (e) { state.sort = e.target.value; renderProducts(); });
   }
 
   document.addEventListener("click", function (e) {
@@ -155,12 +193,14 @@
   });
 
   document.addEventListener("DOMContentLoaded", function () {
-    initFilters();
-    fetchProducts();
+    initControls();
+    fetchData();
   });
 
+  // Quando o idioma muda, ele redesenha os botões e os produtos
   document.addEventListener("languagechange", function () {
+    renderCategoryFilters();
+    renderProducts();
     document.querySelectorAll("[data-i18n]").forEach(function (el) { el.textContent = t(el.getAttribute("data-i18n")); });
-    render();
   });
 })();

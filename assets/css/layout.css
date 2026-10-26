@@ -12,32 +12,23 @@
   display: flex; 
   align-items: center; 
   justify-content: space-between;
-  gap: 10px; 
+  gap: 4px; 
   height: var(--header-h); 
   width: 100%;
 }
 
-/* --- ESTILOS DO LOGOTIPO --- */
+/* --- LOGOTIPO --- */
 .brand { display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
 .brand-logo {
   height: 48px;
   width: auto;
   object-fit: contain;
 }
-/* Transforma o logotipo em branco no rodapé escuro */
 .brand-logo-footer {
   height: 48px;
   width: auto;
   object-fit: contain;
   filter: brightness(0) invert(1);
-}
-
-/* Mantém o estilo antigo caso ainda uses a letra "L" nalguma página */
-.brand-mark {
-  width: 38px; height: 38px; border-radius: 11px; display: grid; place-items: center;
-  background: linear-gradient(135deg, var(--primary), var(--accent));
-  color: #fff; font-weight: 800; font-size: 1.1rem;
-  box-shadow: 0 6px 16px rgba(11, 94, 215, .3);
 }
 
 .main-nav { display: flex; gap: 4px; margin-left: auto; }
@@ -52,11 +43,10 @@
 .header-actions { 
   display: flex; 
   align-items: center; 
-  gap: 6px; 
-  flex-shrink: 0; /* Impede que os botões sejam esmagados */
+  gap: 4px; 
+  flex-shrink: 0; 
 }
 .menu-toggle { display: none; font-size: 1.4rem; padding: 8px; border-radius: 10px; color: var(--ink); }
-.menu-toggle:hover { background: #eef3fb; }
 
 /* ---------- Hero e Resto do Site ---------- */
 .hero { padding: 72px 0 56px; background: radial-gradient(900px 380px at 82% -10%, #dbe9ff 0%, transparent 60%), radial-gradient(700px 300px at 10% 100%, #d9f7ef 0%, transparent 60%), linear-gradient(180deg, #f9fbff, var(--bg)); }
@@ -87,16 +77,14 @@
 .brand-light .brand-name { color: #fff; }
 .footer-bottom { border-top: 1px solid #22304a; padding: 18px 0; display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; font-size: .875rem; color: #8fa0bd; }
 
-/* ---------- RESPONSIVO (CORREÇÃO PARA TELEMÓVEL) ---------- */
+/* ---------- RESPONSIVO (AJUSTES PARA TELEMÓVEL) ---------- */
 @media (max-width: 940px) {
-  /* Header no telemóvel */
   .header-inner {
-    padding-inline: 10px !important;
-    gap: 4px !important;
+    padding-inline: 5px !important;
+    gap: 2px !important;
   }
-  .brand-logo { height: 40px; }
+  .brand-logo { height: 35px; }
 
-  /* Esconde o menu normal, mostra o hamburger */
   .main-nav {
     position: fixed; top: var(--header-h); left: 0; right: 0;
     flex-direction: column; gap: 4px; background: #fff; border-bottom: 1px solid var(--line);
@@ -105,40 +93,44 @@
   .main-nav.open { display: flex; }
   .main-nav a { padding: 12px 14px; border-radius: 10px; }
   
-  /* Força o botão do menu a aparecer e empurra-o para o fim */
   .menu-toggle { 
     display: block !important; 
     order: 99; 
+    padding: 4px !important;
   }
 
-  /* Esconde o texto "Português" e deixa só o ícone */
-  .lang-btn #langLabel, .lang-btn .fa-chevron-down { display: none !important; }
+  /* BOTÃO IDIOMA: Mostra o Globo e a Sigla */
   .lang-btn { 
-    padding: 6px !important; 
-    width: 36px; height: 36px; 
-    justify-content: center; 
-    border-radius: 50% !important;
+    padding: 4px 8px !important; 
+    font-size: 0.75rem !important;
+    border-radius: 999px !important; 
+    gap: 4px !important;
+    display: flex !important;
+    align-items: center !important;
   }
+  .lang-btn #langLabel { display: inline-block !important; } /* Mostra o texto */
+  /* O javascript muda o texto para Português ou English, mas nós cortamos com CSS */
+  #langLabel { max-width: 40px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; } 
 
-  /* Transforma o botão "Entrar" num ícone redondo */
+  /* BOTÃO ENTRAR: Mostra o Ícone e o Texto */
   .header-actions .btn-outline { 
-    padding: 0 !important; 
-    width: 36px !important; 
-    height: 36px !important; 
-    border-radius: 50% !important; 
-    font-size: 0 !important; 
-    display: grid !important; 
-    place-items: center !important;
+    padding: 4px 8px !important; 
+    width: auto !important; 
+    height: auto !important; 
+    border-radius: 999px !important; 
+    font-size: 0.75rem !important; 
+    display: flex !important; 
+    gap: 4px !important;
+    align-items: center !important;
   }
+  /* Adiciona o ícone de utilizador e mantém o texto */
   .header-actions .btn-outline::before {
-    content: "\f007"; /* Ícone de Utilizador */
-    font-family: "Font Awesome 6 Free"; font-weight: 900; font-size: 1rem; color: var(--ink);
+    content: "\f007";
+    font-family: "Font Awesome 6 Free"; font-weight: 900; font-size: 0.8rem;
   }
 
-  /* Diminui o carrinho */
-  .icon-btn { width: 36px !important; height: 36px !important; }
+  .icon-btn { width: 32px !important; height: 32px !important; font-size: 0.9rem !important; }
 
-  /* Ajustes de layout */
   .hero-inner { grid-template-columns: 1fr; gap: 32px; }
   .hero { padding: 48px 0 40px; }
   .grid-3, .grid-2 { grid-template-columns: 1fr; }
@@ -148,5 +140,6 @@
 
 @media (max-width: 520px) {
   .footer-inner { grid-template-columns: 1fr; }
-  .brand-name { display: none; } /* Esconde o nome se estiveres a usar texto ao lado do logo em ecrãs minúsculos */
+  /* Esconde o nome da marca no telemóvel para dar espaço */
+  .brand-name { display: none; } 
 }

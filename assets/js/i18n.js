@@ -16,7 +16,7 @@ const LEOTECH_I18N = {
 
     /* Loja */
     "shop.badge": "Loja", "shop.title": "Produtos e sistemas", "shop.subtitle": "Sistemas desenvolvidos pela Leotech e produtos informáticos organizados por categoria.", "shop.all": "Todos", "shop.searchPh": "Pesquisar...", "shop.sort.name": "Nome (A-Z)", "shop.sort.priceAsc": "Preço (mais baixo)", "shop.sort.priceDesc": "Preço (mais alto)", "shop.addCart": "Adicionar", "shop.added": "Adicionado ao carrinho", "shop.empty": "Sem produtos nesta categoria.", "shop.details": "Ver", "shop.backToShop": "Voltar à Loja",
-    "cat.sistemas": "Sistemas", "cat.computadores": "Computadores", "cat.acessorios": "Acessórios", "cat.redes": "Redes", "cat.impressoras": "Impressoras", "cat.componentes": "Componentes",
+    "cat.sistemas": "Sistemas", "cat.computadores": "Computadores", "cat.acessorios": "Acessórios", "cat.redes": "Redes", "cat.impressoras": "Impressoras", "cat.componentes": "Componentes", "cat.telemoveis": "Telemóveis",
 
     /* Traduções de Produtos (PT) */
     "product.sys-food.name": "FoodManager", "product.sys-food.desc": "Gestão completa para restaurantes: mesas, pedidos, cozinha, caixa e pagamentos.",
@@ -36,12 +36,7 @@ const LEOTECH_I18N = {
 
     /* Página do Produto */
     "produto.notFound": "Produto não encontrado ou foi removido.",
-    "produto.inStock": "Em Stock",
-    "produto.available": "disponíveis",
-    "produto.outOfStock": "Esgotado",
-    "produto.unavailable": "Indisponível",
-    "produto.addToCart": "Adicionar ao Carrinho",
-    "produto.added": "Adicionado!",
+    "produto.inStock": "Em Stock", "produto.available": "disponíveis", "produto.outOfStock": "Esgotado", "produto.unavailable": "Indisponível", "produto.addToCart": "Adicionar ao Carrinho", "produto.added": "Adicionado!",
 
     /* Serviços */
     "serv.badge": "Serviços", "serv.title": "Soluções tecnológicas para o teu negócio", "serv.subtitle": "Desenvolvimento de software, consultoria de dados, suporte técnico, sites, instalações eléctricas e formação — tudo num só lugar.", "serv.request": "Pedir serviço",
@@ -76,6 +71,9 @@ const LEOTECH_I18N = {
     "admin.dashboard": "Dashboard", "admin.orders": "Pedidos", "admin.products": "Produtos", "admin.stock": "Gestão de Stock", "admin.categories": "Categorias", "admin.messages": "Mensagens", "admin.services": "Serviços", "admin.support": "Suporte", "admin.users": "Utilizadores", "admin.reports": "Relatórios", "admin.backToSite": "Voltar ao Site", "admin.overview": "Visão Geral", "admin.totalOrders": "Total de Pedidos", "admin.totalSales": "Vendas Totais", "admin.pending": "Pendentes", "admin.tickets": "Tickets", "admin.recentOrders": "Últimos Pedidos", "admin.id": "ID", "admin.customer": "Cliente", "admin.date": "Data", "admin.total": "Total", "admin.logout": "Sair", "admin.clearData": "Limpar Dados de Teste", "admin.order": "Pedido", "admin.items": "Artigos", "admin.courier": "Estafeta", "admin.status": "Estado", "admin.actions": "Ações", "admin.name": "Nome", "admin.price": "Preço", "admin.category": "Categoria", "admin.quantity": "Quantidade em Stock", "admin.image": "Imagem", "admin.description": "Descrição", "admin.addProduct": "Adicionar Novo Produto", "admin.photo": "Foto", "admin.stockQty": "Stock", "admin.currentStock": "Stock Atual", "admin.updateStock": "Atualizar Stock", "admin.categoryName": "Nome da Categoria", "admin.add": "Adicionar", "admin.contact": "Contacto", "admin.subject": "Assunto / Mensagem", "admin.product": "Produto", "admin.client": "Cliente", "admin.address": "Endereço", "admin.action": "Ação", "admin.save": "Guardar", "admin.saved": "Salvo", "admin.servicesTitle": "Pedidos de Serviços", "admin.service": "Serviço", "admin.technician": "Técnico", "admin.supportTitle": "Suporte ao Cliente", "admin.ticket": "Ticket", "admin.clientEmail": "Email Cliente", "admin.subjectMsg": "Assunto / Mensagem", "admin.usersTitle": "Gestão de Utilizadores", "admin.registerEmployee": "Registar Novo Funcionário", "admin.employeeDesc": "Insere os dados básicos. O email e a palavra-passe serão gerados automaticamente pelo sistema.", "admin.whatsappNumber": "Número de WhatsApp", "admin.rolePermission": "Cargo / Permissão", "admin.createAccount": "Criar conta", "admin.accountCreated": "Conta Criada!", "admin.generatedCredentials": "O sistema gerou as credenciais de acesso.", "admin.howToSend": "Como queres enviar os dados de acesso?", "admin.viaEmail": "Via Email", "admin.viaWhatsApp": "Via WhatsApp", "admin.openEmailApp": "Abrir App de Email", "admin.openWhatsApp": "Abrir WhatsApp", "admin.close": "Fechar", "admin.reportsTitle": "Relatórios de Vendas", "admin.topProducts": "Produtos Mais Vendidos", "admin.salesByCategory": "Vendas por Categoria", "admin.noSales": "Sem vendas registadas.", "admin.noCategoryData": "Sem dados de categorias.",
     "estafeta.deliveries": "As Minhas Entregas", "estafeta.panel": "Painel de Entregas", "estafeta.logout": "Sair",
 
+    /* ADIÇÃO AQUI: MENU DO UTILIZADOR */
+    "user.profile": "Perfil", "user.orders": "Os meus pedidos", "user.services": "Os meus serviços", "user.logout": "Sair",
+
     /* Footer */
     "footer.tagline": "Informática, programação e produtos informáticos.", "footer.company": "Empresa", "footer.services": "Serviços", "footer.shop": "Loja", "footer.about": "Sobre nós", "footer.allServices": "Todos os serviços", "footer.support": "Suporte", "footer.categories": "Categorias", "footer.rights": "Todos os direitos reservados.", "footer.made": "Feito em Moçambique"
   },
@@ -97,7 +95,7 @@ const LEOTECH_I18N = {
 
     /* Loja */
     "shop.badge": "Shop", "shop.title": "Products and systems", "shop.subtitle": "Systems developed by Leotech and IT products organised by category.", "shop.all": "All", "shop.searchPh": "Search...", "shop.sort.name": "Name (A-Z)", "shop.sort.priceAsc": "Price (lowest)", "shop.sort.priceDesc": "Price (highest)", "shop.addCart": "Add", "shop.added": "Added to cart", "shop.empty": "No products in this category.", "shop.details": "View", "shop.backToShop": "Back to Shop",
-    "cat.sistemas": "Systems", "cat.computadores": "Computers", "cat.acessorios": "Accessories", "cat.redes": "Networking", "cat.impressoras": "Printers", "cat.componentes": "Components",
+    "cat.sistemas": "Systems", "cat.computadores": "Computers", "cat.acessorios": "Accessories", "cat.redes": "Networking", "cat.impressoras": "Printers", "cat.componentes": "Components", "cat.telemoveis": "Mobile Phones",
 
     /* Traduções de Produtos (EN) */
     "product.sys-food.name": "FoodManager", "product.sys-food.desc": "Complete management for restaurants: tables, orders, kitchen, cashier and payments.",
@@ -117,12 +115,7 @@ const LEOTECH_I18N = {
 
     /* Página do Produto */
     "produto.notFound": "Product not found or has been removed.",
-    "produto.inStock": "In Stock",
-    "produto.available": "available",
-    "produto.outOfStock": "Out of Stock",
-    "produto.unavailable": "Unavailable",
-    "produto.addToCart": "Add to Cart",
-    "produto.added": "Added!",
+    "produto.inStock": "In Stock", "produto.available": "available", "produto.outOfStock": "Out of Stock", "produto.unavailable": "Unavailable", "produto.addToCart": "Add to Cart", "produto.added": "Added!",
 
     /* Serviços */
     "serv.badge": "Services", "serv.title": "Technology solutions for your business", "serv.subtitle": "Software development, data consulting, technical support, websites, electrical installations and training — all in one place.", "serv.request": "Request service",
@@ -155,10 +148,12 @@ const LEOTECH_I18N = {
     "admin.dashboard": "Dashboard", "admin.orders": "Orders", "admin.products": "Products", "admin.stock": "Stock Management", "admin.categories": "Categories", "admin.messages": "Messages", "admin.services": "Services", "admin.support": "Support", "admin.users": "Users", "admin.reports": "Reports", "admin.backToSite": "Back to Site", "admin.overview": "Overview", "admin.totalOrders": "Total Orders", "admin.totalSales": "Total Sales", "admin.pending": "Pending", "admin.tickets": "Tickets", "admin.recentOrders": "Recent Orders", "admin.id": "ID", "admin.customer": "Customer", "admin.date": "Date", "admin.total": "Total", "admin.logout": "Log out", "admin.clearData": "Clear Test Data", "admin.order": "Order", "admin.items": "Items", "admin.courier": "Courier", "admin.status": "Status", "admin.actions": "Actions", "admin.name": "Name", "admin.price": "Price", "admin.category": "Category", "admin.quantity": "Stock Quantity", "admin.image": "Image", "admin.description": "Description", "admin.addProduct": "Add New Product", "admin.photo": "Photo", "admin.stockQty": "Stock", "admin.currentStock": "Current Stock", "admin.updateStock": "Update Stock", "admin.categoryName": "Category Name", "admin.add": "Add", "admin.contact": "Contact", "admin.subject": "Subject / Message", "admin.product": "Product", "admin.client": "Client", "admin.address": "Address", "admin.action": "Action", "admin.save": "Save", "admin.saved": "Saved", "admin.servicesTitle": "Service Requests", "admin.service": "Service", "admin.technician": "Technician", "admin.supportTitle": "Customer Support", "admin.ticket": "Ticket", "admin.clientEmail": "Client Email", "admin.subjectMsg": "Subject / Message", "admin.usersTitle": "User Management", "admin.registerEmployee": "Register New Employee", "admin.employeeDesc": "Enter basic details. The email and password will be generated automatically by the system.", "admin.whatsappNumber": "WhatsApp Number", "admin.rolePermission": "Role / Permission", "admin.createAccount": "Create account", "admin.accountCreated": "Account Created!", "admin.generatedCredentials": "The system generated the access credentials.", "admin.howToSend": "How do you want to send the access data?", "admin.viaEmail": "Via Email", "admin.viaWhatsApp": "Via WhatsApp", "admin.openEmailApp": "Open Email App", "admin.openWhatsApp": "Open WhatsApp", "admin.close": "Close", "admin.reportsTitle": "Sales Reports", "admin.topProducts": "Best Selling Products", "admin.salesByCategory": "Sales by Category", "admin.noSales": "No sales recorded.", "admin.noCategoryData": "No category data.",
     "estafeta.deliveries": "My Deliveries", "estafeta.panel": "Delivery Panel", "estafeta.logout": "Log out",
 
+    /* ADIÇÃO AQUI: MENU DO UTILIZADOR */
+    "user.profile": "Profile", "user.orders": "My orders", "user.services": "My services", "user.logout": "Sign out",
+
     /* Footer */
     "footer.tagline": "IT, software and computer products.", "footer.company": "Company", "footer.services": "Services", "footer.shop": "Shop", "footer.about": "About us", "footer.allServices": "All services", "footer.support": "Support", "footer.categories": "Categories", "footer.rights": "All rights reserved.", "footer.made": "Made in Mozambique"
   }
 };
 
-// ESTA É A LINHA MÁGICA QUE FALTAVA:
 window.LEOTECH_I18N = LEOTECH_I18N;
