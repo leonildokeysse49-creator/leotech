@@ -100,10 +100,67 @@
   background: #fff; font-size: .85rem; font-weight: 500; cursor: pointer;
 }
 
+/* =========================================
+   RESPONSIVIDADE (TELEMÓVEL E TABLET)
+   ========================================= */
 @media (max-width: 900px) {
-  .admin-layout { grid-template-columns: 1fr; }
-  .admin-sidebar { height: auto; position: static; padding: 16px; }
-  .admin-nav { flex-direction: row; flex-wrap: wrap; }
-  .admin-main { padding: 16px; }
-  .admin-header { flex-direction: column; align-items: flex-start; gap: 12px; }
+  .admin-layout { 
+    display: flex; 
+    flex-direction: column; 
+  }
+  
+  .admin-sidebar { 
+    height: auto; 
+    position: sticky; 
+    top: 0; 
+    z-index: 100;
+    padding: 10px 16px; 
+    border-bottom: 1px solid #22304a;
+  }
+  
+  /* Esconde o logotipo "Admin" no telemóvel para poupar espaço */
+  .admin-brand { 
+    display: none; 
+  }
+  
+  /* Transforma o menu lateral numa barra deslizável (estilo Instagram) */
+  .admin-nav { 
+    flex-direction: row; 
+    flex-wrap: nowrap; 
+    overflow-x: auto; 
+    gap: 8px; 
+    padding-bottom: 5px;
+    -webkit-overflow-scrolling: touch; 
+  }
+  
+  /* Esconde a barra de rolagem feia */
+  .admin-nav::-webkit-scrollbar { 
+    display: none; 
+  }
+  
+  .admin-nav a { 
+    white-space: nowrap; 
+    padding: 8px 14px; 
+    font-size: 0.85rem; 
+  }
+  
+  /* Remove aquele "margin-top: 20px" inline do botão Voltar */
+  .admin-nav a[href="../index.html"] { 
+    margin-top: 0 !important; 
+  }
+  
+  .admin-main { 
+    padding: 16px; 
+  }
+  
+  .admin-header { 
+    flex-direction: column; 
+    align-items: flex-start; 
+    gap: 12px; 
+  }
+  
+  /* Força a tabela a ter uma largura mínima para não esmagar as colunas */
+  .data-table {
+    min-width: 700px; 
+  }
 }

@@ -295,16 +295,33 @@
 .toast.show { transform: translateX(-50%) translateY(0); }
 .toast i { color: var(--accent); }
 
-/* ---------- Responsivo ---------- */
+/* =========================================
+   RESPONSIVIDADE (TELEMÓVEL E TABLET)
+   ========================================= */
 @media (max-width: 900px) {
   .contact-grid { grid-template-columns: 1fr; }
   .form-row    { grid-template-columns: 1fr; }
   .about-grid  { grid-template-columns: 1fr; }
 }
+
 @media (max-width: 600px) {
   .shop-toolbar { flex-direction: column; align-items: stretch; }
   .shop-controls { flex-direction: column; }
   .shop-controls .input, .shop-controls .select { min-width: 0; width: 100%; }
+  .product-grid { grid-template-columns: 1fr; }
   .auth-card { padding: 24px; }
-  .product-grid { grid-template-columns: 1fr; } /* Força 1 coluna no telemóvel */
+  
+  /* NOVAS REGRAS PARA TELEMÓVEL */
+  .form-row {
+    grid-template-columns: 1fr; /* Força os campos lado-a-lado a ficarem em cima/baixo */
+  }
+  
+  .modal-box {
+    width: 95%; 
+    padding: 20px 16px; /* Reduz o espaço dentro dos modais */
+  }
+  
+  .checkout-form, .card {
+    padding: 16px; /* Reduz o espaço dentro dos cartões */
+  }
 }

@@ -63,9 +63,66 @@
 .order-body { font-size: .9rem; }
 .order-body strong { color: var(--ink); }
 
-/* Responsivo para telemóvel */
+/* =========================================
+   RESPONSIVIDADE (TELEMÓVEL E TABLET)
+   ========================================= */
 @media (max-width: 800px) {
-  .account-layout { grid-template-columns: 1fr; }
-  .account-sidebar { position: static; margin-bottom: 20px; }
-  .account-content { padding: 20px; }
+  .account-layout { 
+    display: flex; 
+    flex-direction: column; 
+  }
+  
+  .account-sidebar { 
+    position: static; 
+    margin-bottom: 20px; 
+    padding: 16px;
+  }
+  
+  /* Coloca o avatar e o nome lado a lado */
+  .account-user { 
+    display: flex; 
+    align-items: center; 
+    text-align: left; 
+    gap: 16px; 
+    padding-bottom: 16px; 
+    margin-bottom: 16px; 
+  }
+  
+  .account-avatar { 
+    margin: 0; 
+    width: 50px; 
+    height: 50px; 
+    font-size: 1.2rem; 
+    flex-shrink: 0;
+  }
+  
+  /* Menu de navegação com scroll horizontal */
+  .account-nav { 
+    flex-direction: row; 
+    flex-wrap: nowrap; 
+    overflow-x: auto; 
+    padding-bottom: 5px;
+    -webkit-overflow-scrolling: touch;
+  }
+  
+  .account-nav::-webkit-scrollbar { 
+    display: none; 
+  }
+  
+  .account-nav a { 
+    white-space: nowrap; 
+    padding: 8px 14px; 
+    font-size: 0.85rem; 
+    border-radius: 8px; 
+  }
+  
+  .account-nav a.logout { 
+    margin-top: 0; 
+    border-top: none; 
+    padding-top: 8px; 
+  }
+  
+  .account-content { 
+    padding: 20px; 
+  }
 }
