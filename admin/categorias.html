@@ -14,38 +14,40 @@
     <aside class="admin-sidebar">
       <a href="index.html" class="admin-brand"><span class="brand-mark">L</span> Admin</a>
       <nav class="admin-nav">
-        <a href="index.html"><i class="fa-solid fa-chart-pie"></i> Dashboard</a>
-        <a href="pedidos.html"><i class="fa-solid fa-box"></i> Pedidos</a>
-        <a href="produtos.html"><i class="fa-solid fa-tags"></i> Produtos</a>
-        <a href="stock.html"><i class="fa-solid fa-boxes-stacked"></i> Gestão de Stock</a>
-        <a href="categorias.html" class="active"><i class="fa-solid fa-list"></i> Categorias</a>
-        <a href="servicos.html"><i class="fa-solid fa-screwdriver-wrench"></i> Serviços</a>
-        <a href="suporte.html"><i class="fa-solid fa-headset"></i> Suporte</a>
-        <a href="utilizadores.html"><i class="fa-solid fa-users"></i> Utilizadores</a>
-        <a href="../index.html" style="margin-top:20px"><i class="fa-solid fa-arrow-left"></i> Voltar ao Site</a>
+        <a href="index.html"><i class="fa-solid fa-chart-pie"></i> <span data-i18n="admin.dashboard">Dashboard</span></a>
+        <a href="pedidos.html"><i class="fa-solid fa-box"></i> <span data-i18n="admin.orders">Pedidos</span></a>
+        <a href="produtos.html"><i class="fa-solid fa-tags"></i> <span data-i18n="admin.products">Produtos</span></a>
+        <a href="stock.html"><i class="fa-solid fa-boxes-stacked"></i> <span data-i18n="admin.stock">Gestão de Stock</span></a>
+        <a href="categorias.html" class="active"><i class="fa-solid fa-list"></i> <span data-i18n="admin.categories">Categorias</span></a>
+        <a href="mensagens.html"><i class="fa-solid fa-envelope"></i> <span data-i18n="admin.messages">Mensagens</span></a>
+        <a href="servicos.html"><i class="fa-solid fa-screwdriver-wrench"></i> <span data-i18n="admin.services">Serviços</span></a>
+        <a href="suporte.html"><i class="fa-solid fa-headset"></i> <span data-i18n="admin.support">Suporte</span></a>
+        <a href="utilizadores.html"><i class="fa-solid fa-users"></i> <span data-i18n="admin.users">Utilizadores</span></a>
+        <a href="relatorios.html"><i class="fa-solid fa-chart-line"></i> <span data-i18n="admin.reports">Relatórios</span></a>
+        <a href="../index.html" style="margin-top:20px"><i class="fa-solid fa-arrow-left"></i> <span data-i18n="admin.backToSite">Voltar ao Site</span></a>
       </nav>
     </aside>
 
     <main class="admin-main">
       <div class="admin-header">
-        <h1>Gestão de Categorias</h1>
-        <div class="admin-user"><i class="fa-solid fa-circle-user"></i> <span id="adminName">Admin</span> <button id="adminLogout" class="btn btn-outline">Sair</button></div>
+        <h1 data-i18n="admin.categoriesTitle">Gestão de Categorias</h1>
+        <div class="admin-user"><i class="fa-solid fa-circle-user"></i> <span id="adminName">Admin</span> <button id="adminLogout" class="btn btn-outline" data-i18n="admin.logout">Sair</button></div>
       </div>
 
       <div class="card" style="margin-bottom:24px;">
-        <h3 style="margin-bottom:16px;">Adicionar Nova Categoria</h3>
+        <h3 style="margin-bottom:16px;" data-i18n="admin.addCategory">Adicionar Nova Categoria</h3>
         <form id="categoryForm" style="display:flex; gap:16px; align-items:flex-end;">
           <label class="field" style="flex:1; margin-bottom:0;">
-            <span>Nome da Categoria</span>
+            <span data-i18n="admin.categoryName">Nome da Categoria</span>
             <input class="input" name="categoryName" required placeholder="Ex: Telemóveis">
           </label>
-          <button type="submit" class="btn btn-primary" style="height: 46px;"><i class="fa-solid fa-plus"></i> Adicionar</button>
+          <button type="submit" class="btn btn-primary" style="height: 46px;"><i class="fa-solid fa-plus"></i> <span data-i18n="admin.add">Adicionar</span></button>
         </form>
       </div>
 
       <div class="table-container">
         <table class="data-table">
-          <thead><tr><th>ID</th><th>Nome da Categoria</th><th>Ações</th></tr></thead>
+          <thead><tr><th data-i18n="admin.id">ID</th><th data-i18n="admin.categoryName">Nome da Categoria</th><th data-i18n="admin.actions">Ações</th></tr></thead>
           <tbody id="adminCategoriesRoot"><tr><td colspan="3" style="text-align:center">A carregar...</td></tr></tbody>
         </table>
       </div>

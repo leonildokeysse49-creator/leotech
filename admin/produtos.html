@@ -20,61 +20,61 @@
     <aside class="admin-sidebar">
       <a href="index.html" class="admin-brand"><span class="brand-mark">L</span> Admin</a>
       <nav class="admin-nav">
-        <a href="index.html"><i class="fa-solid fa-chart-pie"></i> Dashboard</a>
-        <a href="pedidos.html"><i class="fa-solid fa-box"></i> Pedidos</a>
-        <a href="produtos.html" class="active"><i class="fa-solid fa-tags"></i> Produtos</a>
-        <a href="stock.html"><i class="fa-solid fa-boxes-stacked"></i> Gestão de Stock</a>
-        <a href="categorias.html"><i class="fa-solid fa-list"></i> Categorias</a>
-        <a href="mensagens.html"><i class="fa-solid fa-envelope"></i> Mensagens</a>
-        <a href="servicos.html"><i class="fa-solid fa-screwdriver-wrench"></i> Serviços</a>
-        <a href="suporte.html"><i class="fa-solid fa-headset"></i> Suporte</a>
-        <a href="utilizadores.html"><i class="fa-solid fa-users"></i> Utilizadores</a>
-        <a href="relatorios.html"><i class="fa-solid fa-chart-line"></i> Relatórios</a>
-        <a href="../index.html" style="margin-top:20px"><i class="fa-solid fa-arrow-left"></i> Voltar ao Site</a>
+        <a href="index.html"><i class="fa-solid fa-chart-pie"></i> <span data-i18n="admin.dashboard">Dashboard</span></a>
+        <a href="pedidos.html"><i class="fa-solid fa-box"></i> <span data-i18n="admin.orders">Pedidos</span></a>
+        <a href="produtos.html" class="active"><i class="fa-solid fa-tags"></i> <span data-i18n="admin.products">Produtos</span></a>
+        <a href="stock.html"><i class="fa-solid fa-boxes-stacked"></i> <span data-i18n="admin.stock">Gestão de Stock</span></a>
+        <a href="categorias.html"><i class="fa-solid fa-list"></i> <span data-i18n="admin.categories">Categorias</span></a>
+        <a href="mensagens.html"><i class="fa-solid fa-envelope"></i> <span data-i18n="admin.messages">Mensagens</span></a>
+        <a href="servicos.html"><i class="fa-solid fa-screwdriver-wrench"></i> <span data-i18n="admin.services">Serviços</span></a>
+        <a href="suporte.html"><i class="fa-solid fa-headset"></i> <span data-i18n="admin.support">Suporte</span></a>
+        <a href="utilizadores.html"><i class="fa-solid fa-users"></i> <span data-i18n="admin.users">Utilizadores</span></a>
+        <a href="relatorios.html"><i class="fa-solid fa-chart-line"></i> <span data-i18n="admin.reports">Relatórios</span></a>
+        <a href="../index.html" style="margin-top:20px"><i class="fa-solid fa-arrow-left"></i> <span data-i18n="admin.backToSite">Voltar ao Site</span></a>
       </nav>
     </aside>
 
     <main class="admin-main">
       <div class="admin-header">
-        <h1>Gestão de Produtos</h1>
-        <div class="admin-user"><i class="fa-solid fa-circle-user"></i> <span id="adminName">Admin</span> <button id="adminLogout" class="btn btn-outline">Sair</button></div>
+        <h1 data-i18n="admin.productsTitle">Gestão de Produtos</h1>
+        <div class="admin-user"><i class="fa-solid fa-circle-user"></i> <span id="adminName">Admin</span> <button id="adminLogout" class="btn btn-outline" data-i18n="admin.logout">Sair</button></div>
       </div>
 
       <div class="card" style="margin-bottom:24px;" id="formContainer">
-        <h3 style="margin-bottom:16px;" id="formTitle">Adicionar Novo Produto</h3>
+        <h3 style="margin-bottom:16px;" id="formTitle" data-i18n="admin.addProduct">Adicionar Novo Produto</h3>
         <form id="productForm" class="grid-2" style="gap:16px;">
           <input type="hidden" name="editId" id="editId">
           
-          <label class="field"><span>Nome do Produto</span><input class="input" name="name" id="prodName" required></label>
-          <label class="field"><span>Preço (MZN)</span><input class="input" type="number" name="price" id="prodPrice" required></label>
+          <label class="field"><span data-i18n="admin.name">Nome do Produto</span><input class="input" name="name" id="prodName" required></label>
+          <label class="field"><span data-i18n="admin.price">Preço (MZN)</span><input class="input" type="number" name="price" id="prodPrice" required></label>
           
-          <label class="field"><span>Categoria</span>
+          <label class="field"><span data-i18n="admin.category">Categoria</span>
             <select class="select" name="category" id="prodCategory" required>
               <option value="">A carregar categorias...</option>
             </select>
           </label>
 
-          <label class="field"><span>Quantidade em Stock</span><input class="input" type="number" name="stock" id="prodStock" required min="0" value="10"></label>
+          <label class="field"><span data-i18n="admin.quantity">Quantidade em Stock</span><input class="input" type="number" name="stock" id="prodStock" required min="0" value="10"></label>
 
-          <label class="field"><span>Imagem via Link (URL)</span><input class="input" type="url" name="imgUrl" id="prodImgUrl" placeholder="https://..."></label>
+          <label class="field"><span data-i18n="admin.image">Imagem via Link (URL)</span><input class="input" type="url" name="imgUrl" id="prodImgUrl" placeholder="https://..."></label>
           
           <label class="field" style="grid-column: 1 / -1;">
-            <span>OU Imagem do Computador (Upload Direto)</span>
+            <span data-i18n="admin.photo">OU Imagem do Computador (Upload Direto)</span>
             <input class="input" type="file" accept="image/*" id="prodImgFile" style="padding:8px;">
           </label>
 
-          <label class="field" style="grid-column: 1 / -1;"><span>Descrição</span><input class="input" name="desc" id="prodDesc" required></label>
+          <label class="field" style="grid-column: 1 / -1;"><span data-i18n="admin.description">Descrição</span><input class="input" name="desc" id="prodDesc" required></label>
           
           <div style="grid-column: 1 / -1;">
-            <button type="submit" class="btn btn-primary" id="submitBtn"><i class="fa-solid fa-plus"></i> Adicionar Produto</button>
-            <button type="button" class="btn btn-outline" id="cancelEditBtn" hidden onclick="cancelEdit()">Cancelar Edição</button>
+            <button type="submit" class="btn btn-primary" id="submitBtn"><i class="fa-solid fa-plus"></i> <span data-i18n="admin.add">Adicionar Produto</span></button>
+            <button type="button" class="btn btn-outline" id="cancelEditBtn" hidden onclick="cancelEdit()" data-i18n="admin.close">Cancelar Edição</button>
           </div>
         </form>
       </div>
 
       <div class="table-container">
         <table class="data-table">
-          <thead><tr><th>Foto</th><th>Nome</th><th>Categoria</th><th>Preço</th><th>Stock</th><th>Ações</th></tr></thead>
+          <thead><tr><th data-i18n="admin.photo">Foto</th><th data-i18n="admin.name">Nome</th><th data-i18n="admin.category">Categoria</th><th data-i18n="admin.price">Preço</th><th data-i18n="admin.stockQty">Stock</th><th data-i18n="admin.actions">Ações</th></tr></thead>
           <tbody id="adminProdutosRoot"><tr><td colspan="6" style="text-align:center">A carregar...</td></tr></tbody>
         </table>
       </div>
@@ -87,7 +87,6 @@
   <script src="../assets/js/admin.js"></script>
   <script>
     var currentFile = null;
-
     async function waitForSupabase() {
       return new Promise(function(resolve) {
         if (window.supabaseClient) { resolve(); return; }
@@ -110,9 +109,7 @@
         categorySelect.innerHTML += '<option value="' + c.name.toLowerCase() + '">' + c.name + '</option>';
       });
 
-      document.getElementById("prodImgFile").addEventListener("change", function(e) {
-        currentFile = e.target.files[0];
-      });
+      document.getElementById("prodImgFile").addEventListener("change", function(e) { currentFile = e.target.files[0]; });
       
       async function renderProducts() {
         root.innerHTML = '<tr><td colspan="6" style="text-align:center">A carregar...</td></tr>';
@@ -143,7 +140,7 @@
         var btn = document.getElementById("submitBtn");
         var originalTxt = btn.innerHTML;
         btn.disabled = true;
-        btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> A processar...';
+        btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i>';
 
         var editId = document.getElementById("editId").value;
         var imgFinal = document.getElementById("prodImgUrl").value.trim();
@@ -151,7 +148,6 @@
         if (currentFile) {
           var fileName = Date.now() + "_" + currentFile.name;
           var resUpload = await window.supabaseClient.storage.from('products').upload(fileName, currentFile);
-          
           if (!resUpload.error) {
             var resUrl = window.supabaseClient.storage.from('products').getPublicUrl(fileName);
             imgFinal = resUrl.data.publicUrl;
@@ -159,13 +155,8 @@
         }
 
         var data = {
-          name: form.name.value,
-          price: parseFloat(form.price.value),
-          category: form.category.value.trim(),
-          stock_quantity: parseInt(form.stock.value),
-          image_url: imgFinal,
-          description: form.desc.value,
-          icon: "fa-box"
+          name: form.name.value, price: parseFloat(form.price.value), category: form.category.value.trim(),
+          stock_quantity: parseInt(form.stock.value), image_url: imgFinal, description: form.desc.value, icon: "fa-box"
         };
 
         if (editId) {
@@ -210,7 +201,7 @@
           form.desc.value = p.description || "";
           
           document.getElementById("formTitle").textContent = "Editar Produto";
-          document.getElementById("submitBtn").innerHTML = '<i class="fa-solid fa-save"></i> Guardar Alterações';
+          document.getElementById("submitBtn").innerHTML = '<i class="fa-solid fa-save"></i> Guardar';
           document.getElementById("cancelEditBtn").hidden = false;
           window.scrollTo(0, 0);
         }

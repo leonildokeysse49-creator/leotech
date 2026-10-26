@@ -14,26 +14,26 @@
     <aside class="admin-sidebar">
       <a href="index.html" class="admin-brand"><span class="brand-mark">L</span> Admin</a>
       <nav class="admin-nav">
-        <a href="index.html"><i class="fa-solid fa-chart-pie"></i> Dashboard</a>
-        <a href="pedidos.html" class="active"><i class="fa-solid fa-box"></i> Pedidos</a>
-        <a href="produtos.html"><i class="fa-solid fa-tags"></i> Produtos</a>
-        <a href="stock.html"><i class="fa-solid fa-boxes-stacked"></i> Gestão de Stock</a>
-        <a href="categorias.html"><i class="fa-solid fa-list"></i> Categorias</a>
-        <a href="mensagens.html"><i class="fa-solid fa-envelope"></i> Mensagens</a>
-        <a href="servicos.html"><i class="fa-solid fa-screwdriver-wrench"></i> Serviços</a>
-        <a href="suporte.html"><i class="fa-solid fa-headset"></i> Suporte</a>
-        <a href="utilizadores.html"><i class="fa-solid fa-users"></i> Utilizadores</a>
-        <a href="relatorios.html"><i class="fa-solid fa-chart-line"></i> Relatórios</a>
-        <a href="../index.html" style="margin-top:20px"><i class="fa-solid fa-arrow-left"></i> Voltar ao Site</a>
+        <a href="index.html"><i class="fa-solid fa-chart-pie"></i> <span data-i18n="admin.dashboard">Dashboard</span></a>
+        <a href="pedidos.html" class="active"><i class="fa-solid fa-box"></i> <span data-i18n="admin.orders">Pedidos</span></a>
+        <a href="produtos.html"><i class="fa-solid fa-tags"></i> <span data-i18n="admin.products">Produtos</span></a>
+        <a href="stock.html"><i class="fa-solid fa-boxes-stacked"></i> <span data-i18n="admin.stock">Gestão de Stock</span></a>
+        <a href="categorias.html"><i class="fa-solid fa-list"></i> <span data-i18n="admin.categories">Categorias</span></a>
+        <a href="mensagens.html"><i class="fa-solid fa-envelope"></i> <span data-i18n="admin.messages">Mensagens</span></a>
+        <a href="servicos.html"><i class="fa-solid fa-screwdriver-wrench"></i> <span data-i18n="admin.services">Serviços</span></a>
+        <a href="suporte.html"><i class="fa-solid fa-headset"></i> <span data-i18n="admin.support">Suporte</span></a>
+        <a href="utilizadores.html"><i class="fa-solid fa-users"></i> <span data-i18n="admin.users">Utilizadores</span></a>
+        <a href="relatorios.html"><i class="fa-solid fa-chart-line"></i> <span data-i18n="admin.reports">Relatórios</span></a>
+        <a href="../index.html" style="margin-top:20px"><i class="fa-solid fa-arrow-left"></i> <span data-i18n="admin.backToSite">Voltar ao Site</span></a>
       </nav>
     </aside>
 
     <main class="admin-main">
       <div class="admin-header">
-        <h1>Gestão de Pedidos</h1>
+        <h1 data-i18n="admin.ordersTitle">Gestão de Pedidos</h1>
         <div class="admin-user">
           <i class="fa-solid fa-circle-user"></i> <span id="adminName">Admin</span>
-          <button id="adminLogout" class="btn btn-outline">Sair</button>
+          <button id="adminLogout" class="btn btn-outline" data-i18n="admin.logout">Sair</button>
         </div>
       </div>
 
@@ -41,13 +41,13 @@
         <table class="data-table">
           <thead>
             <tr>
-              <th>Pedido</th>
-              <th>Cliente</th>
-              <th>Artigos</th>
-              <th>Total</th>
-              <th>Estafeta</th>
-              <th>Estado</th>
-              <th>Ações</th>
+              <th data-i18n="admin.order">Pedido</th>
+              <th data-i18n="admin.customer">Cliente</th>
+              <th data-i18n="admin.items">Artigos</th>
+              <th data-i18n="admin.total">Total</th>
+              <th data-i18n="admin.courier">Estafeta</th>
+              <th data-i18n="admin.status">Estado</th>
+              <th data-i18n="admin.actions">Ações</th>
             </tr>
           </thead>
           <tbody id="adminPedidosRoot"></tbody>
