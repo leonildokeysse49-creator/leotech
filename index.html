@@ -5,16 +5,19 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Leotech — Soluções em Informática, Software e Loja</title>
   <meta name="description" content="Da venda de equipamentos informáticos ao desenvolvimento de sistemas personalizados e suporte técnico especializado. A Leotech tem tudo o que precisas num só lugar.">
-  <link rel="stylesheet" href="assets/css/base.css">
-  <link rel="stylesheet" href="assets/css/layout.css">
-  <link rel="stylesheet" href="assets/css/components.css">
+  <link rel="icon" type="image/png" href="assets/img/logo.png">
+  
+  <!-- O ?v=3 força o telemóvel a atualizar o CSS -->
+  <link rel="stylesheet" href="assets/css/base.css?v=3">
+  <link rel="stylesheet" href="assets/css/layout.css?v=3">
+  <link rel="stylesheet" href="assets/css/components.css?v=3">
 </head>
 <body>
   <header class="site-header">
     <div class="container header-inner">
       <a href="index.html" class="brand">
-        <span class="brand-mark">L</span>
-        <span class="brand-name">Leotech</span>
+        <!-- LOGOTIPO AQUI -->
+        <img src="assets/img/logo.png" alt="Leotech" class="brand-logo">
       </a>
       <nav class="main-nav" id="mainNav">
         <a href="index.html" class="active" data-i18n="nav.home">Início</a>
@@ -172,7 +175,10 @@
     <div class="container">
       <div class="footer-inner">
         <div class="footer-brand">
-          <a href="index.html" class="brand brand-light"><span class="brand-mark">L</span><span class="brand-name">Leotech</span></a>
+          <a href="index.html" class="brand brand-light">
+            <!-- LOGOTIPO NO RODAPÉ (O CSS trata de deixar a cor branca) -->
+            <img src="assets/img/logo.png" alt="Leotech" class="brand-logo-footer">
+          </a>
           <p data-i18n="footer.tagline">Informática, programação e produtos informáticos.</p>
         </div>
         <div>
@@ -209,7 +215,7 @@
   <script src="assets/js/auth.js"></script>
   <script src="assets/js/nav.js"></script>
   
-  <!-- Script para carregar os 3 produtos em destaque com tradução -->
+  <!-- Script para carregar os produtos em destaque com tradução -->
   <script>
     function t(k) { return window.LeotechLang ? window.LeotechLang.t(k) : k; }
     

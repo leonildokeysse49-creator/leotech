@@ -25,7 +25,7 @@
 
 html { 
   scroll-behavior: smooth; 
-  overflow-x: hidden; /* Bloqueia scroll horizontal */
+  overflow-x: hidden; /* Bloqueia deslize horizontal */
 }
 
 body {
@@ -37,7 +37,7 @@ body {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  overflow-x: hidden; /* Bloqueia scroll horizontal */
+  overflow-x: hidden; /* Bloqueia deslize horizontal */
   width: 100%;
 }
 
