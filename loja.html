@@ -11,11 +11,11 @@
 <body>
   <header class="site-header">
     <div class="container header-inner">
-      <a href="index.html" class="brand"><span class="brand-mark">L</span><span class="brand-name">Leotech</span></a>
+      <a href="index.html" class="brand"><img src="assets/img/logo.png" alt="Leotech" class="brand-logo"></a>
       <nav class="main-nav" id="mainNav">
         <a href="index.html" data-i18n="nav.home">Início</a>
         <a href="servicos.html" data-i18n="nav.services">Serviços</a>
-        <a href="loja.html" data-i18n="nav.shop">Loja</a>
+        <a href="loja.html" class="active" data-i18n="nav.shop">Loja</a>
         <a href="sobre.html" data-i18n="nav.about">Sobre</a>
         <a href="contacto.html" data-i18n="nav.contact">Contacto</a>
       </nav>
@@ -50,15 +50,9 @@
     <section class="section">
       <div class="container">
         <div class="shop-toolbar">
-          <div class="shop-cats">
-            <button type="button" class="chip active" data-cat="all" data-i18n="shop.all">Todos</button>
-            <button type="button" class="chip" data-cat="sistemas"><i class="fa-solid fa-laptop-code"></i> <span data-i18n="cat.sistemas">Sistemas</span></button>
-            <button type="button" class="chip" data-cat="computadores"><i class="fa-solid fa-laptop"></i> <span data-i18n="cat.computadores">Computadores</span></button>
-            <button type="button" class="chip" data-cat="acessorios"><i class="fa-solid fa-computer-mouse"></i> <span data-i18n="cat.acessorios">Acessórios</span></button>
-            <button type="button" class="chip" data-cat="redes"><i class="fa-solid fa-wifi"></i> <span data-i18n="cat.redes">Redes</span></button>
-            <button type="button" class="chip" data-cat="impressoras"><i class="fa-solid fa-print"></i> <span data-i18n="cat.impressoras">Impressoras</span></button>
-            <button type="button" class="chip" data-cat="componentes"><i class="fa-solid fa-microchip"></i> <span data-i18n="cat.componentes">Componentes</span></button>
-          </div>
+          <!-- AQUI ESTÁ A MAGIA: A div está vazia e o JS preenche -->
+          <div class="shop-cats" id="shopCategories"></div>
+          
           <div class="shop-controls">
             <input type="search" id="shopSearch" class="input" placeholder="Pesquisar..." data-i18n-placeholder="shop.searchPh">
             <select id="shopSort" class="select">
@@ -76,10 +70,7 @@
   <footer class="site-footer">
     <div class="container">
       <div class="footer-inner">
-        <div class="footer-brand">
-          <a href="index.html" class="brand brand-light"><span class="brand-mark">L</span><span class="brand-name">Leotech</span></a>
-          <p data-i18n="footer.tagline">Informática, programação e produtos informáticos.</p>
-        </div>
+        <div class="footer-brand"><a href="index.html" class="brand brand-light"><img src="assets/img/logo.png" alt="Leotech" class="brand-logo-footer"></a><p data-i18n="footer.tagline">Informática, programação e produtos informáticos.</p></div>
         <div><h4 data-i18n="footer.company">Empresa</h4><ul><li><a href="sobre.html" data-i18n="footer.about">Sobre nós</a></li><li><a href="contacto.html" data-i18n="nav.contact">Contacto</a></li></ul></div>
         <div><h4 data-i18n="footer.services">Serviços</h4><ul><li><a href="servicos.html" data-i18n="footer.allServices">Todos os serviços</a></li><li><a href="conta/suporte.html" data-i18n="footer.support">Suporte</a></li></ul></div>
         <div><h4 data-i18n="footer.shop">Loja</h4><ul><li><a href="loja.html" data-i18n="footer.categories">Categorias</a></li><li><a href="carrinho.html" data-i18n="nav.cart">Carrinho</a></li></ul></div>
