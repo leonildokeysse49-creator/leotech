@@ -50,6 +50,7 @@
 .order-header {
   display: flex; justify-content: space-between; align-items: center;
   border-bottom: 1px solid var(--line); padding-bottom: 12px; margin-bottom: 12px;
+  flex-wrap: wrap; gap: 10px;
 }
 .order-id { font-weight: 700; color: var(--primary); }
 .order-date { font-size: .85rem; color: var(--muted); }
@@ -62,7 +63,9 @@
 .order-body { font-size: .9rem; }
 .order-body strong { color: var(--ink); }
 
+/* Responsivo para telemóvel */
 @media (max-width: 800px) {
   .account-layout { grid-template-columns: 1fr; }
-  .account-sidebar { position: static; }
+  .account-sidebar { position: static; margin-bottom: 20px; }
+  .account-content { padding: 20px; }
 }

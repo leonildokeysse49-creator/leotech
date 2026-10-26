@@ -306,4 +306,5 @@
   .shop-controls { flex-direction: column; }
   .shop-controls .input, .shop-controls .select { min-width: 0; width: 100%; }
   .auth-card { padding: 24px; }
+  .product-grid { grid-template-columns: 1fr; } /* Força 1 coluna no telemóvel */
 }

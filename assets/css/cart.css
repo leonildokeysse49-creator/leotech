@@ -127,4 +127,5 @@
   .cart-item { grid-template-columns: 70px 1fr; }
   .cart-thumb { width: 70px; height: 60px; font-size: 1.3rem; }
   .cart-item .btn-remove { grid-column: 1 / -1; justify-self: end; margin-top: -8px; }
+  .checkout-summary .mini-item { flex-direction: column; gap: 4px; }
 }

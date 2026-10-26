@@ -102,6 +102,8 @@
 
 @media (max-width: 900px) {
   .admin-layout { grid-template-columns: 1fr; }
-  .admin-sidebar { height: auto; position: static; }
+  .admin-sidebar { height: auto; position: static; padding: 16px; }
   .admin-nav { flex-direction: row; flex-wrap: wrap; }
+  .admin-main { padding: 16px; }
+  .admin-header { flex-direction: column; align-items: flex-start; gap: 12px; }
 }
